@@ -70,6 +70,12 @@
     </Compile>
     <Compile Include="IService1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Tags\Model\AnalogInputTag.cs" />
+    <Compile Include="Tags\Model\AnalogOutputTag.cs" />
+    <Compile Include="Tags\Model\DigitalInputTag.cs" />
+    <Compile Include="Tags\Model\DigitalOutputTag.cs" />
+    <Compile Include="Tags\Model\Tag.cs" />
+    <Compile Include="Tags\Model\Unit.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

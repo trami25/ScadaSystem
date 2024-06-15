@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTDriver", "RTDriver\RTDriv
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnit\RTUnit.csproj", "{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorApp", "KeyGeneratorApp\KeyGeneratorApp.csproj", "{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

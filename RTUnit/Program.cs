@@ -1,4 +1,7 @@
 ﻿using System;
+using System.IO;
+using System.Security.Cryptography;
+using System.Text;
 using System.Threading;
 using RTDriver;
 
@@ -8,32 +11,47 @@ namespace RTUnit
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Enter RTU ID:");
-            string rtuId = Console.ReadLine();  //RTU1
+            Console.WriteLine("Unesite adresu (primer: 127.0.0.1):");
+            string address = Console.ReadLine();
 
-            Console.WriteLine("Enter RT Driver address:");
-            string address = Console.ReadLine();  //"127.0.0.1"
+            Console.WriteLine("Unesite ID RTU-a:");
+            string rtuId = Console.ReadLine();
 
-            Console.WriteLine("Enter lower limit:");
+            Console.WriteLine("Unesite donju granicu:");
             double lowerLimit = double.Parse(Console.ReadLine());
 
-            Console.WriteLine("Enter upper limit:");
+            Console.WriteLine("Unesite gornju granicu:");
             double upperLimit = double.Parse(Console.ReadLine());
 
             RTDriver.RTDriver driver = new RTDriver.RTDriver();
+            byte[] privateKey = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privateKey.pem");
 
-            // simulacija slanja podataka
             Random random = new Random();
             while (true)
             {
                 double value = random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
-                driver.ReceiveData(address, value);
+                string message = $"{address}:{value}";
 
-                // na svakih 10 sekundi saljem podatke
-                Thread.Sleep(10000);
+                byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+                byte[] signedMessage = SignMessage(messageBytes, privateKey);
+
+                driver.ReceiveData(address, value, signedMessage);
+
+                Thread.Sleep(10000); // slanje poruke na svakih 10 sec
+            }
+        }
+
+        public static byte[] SignMessage(byte[] message, byte[] privateKey)
+        {
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportRSAPrivateKey(privateKey, out _);
+                return rsa.SignData(message, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             }
         }
     }
 }
+
+
 
 

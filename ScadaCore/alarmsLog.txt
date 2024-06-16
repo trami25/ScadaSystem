@@ -1,0 +1,2 @@
+Alarm: MARA, Type: High, Priority: 3, Threshold: 234, Activated At: 16.6.2024. 17:16:52
+Alarm: mara, Type: low, Priority: 1, Threshold: 3456, Activated At: 16.6.2024. 17:17:33

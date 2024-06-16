@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Security.Cryptography;
 using System.ServiceModel;
 using Microsoft.EntityFrameworkCore;
@@ -9,10 +11,41 @@ namespace ScadaCore
     public class Authentication : IAuthentication, ISimpleService
     {
         private readonly UsersContext _context;
+        private static List<Alarm> alarms = new List<Alarm>();
+        private const string AlarmsLogFilePath = "alarmsLog.txt";
 
         public Authentication()
         {
             _context = new UsersContext();
+        }
+
+        public void AddAlarm(string tagName, string type, int priority, double threshold)
+        {
+            var alarm = new Alarm(tagName, type, priority, threshold);
+            alarms.Add(alarm);
+            LogAlarm(alarm);
+        }
+
+        public void RemoveAlarm(string tagName)
+        {
+            var alarmToRemove = alarms.FirstOrDefault(a => a.TagName == tagName);
+            if (alarmToRemove != null)
+            {
+                alarms.Remove(alarmToRemove);
+            }
+        }
+
+        public List<Alarm> GetActiveAlarms()
+        {
+            return alarms;
+        }
+
+        private void LogAlarm(Alarm alarm)
+        {
+            using (StreamWriter sw = File.AppendText(AlarmsLogFilePath))
+            {
+                sw.WriteLine($"Alarm: {alarm.TagName}, Type: {alarm.Type}, Priority: {alarm.Priority}, Threshold: {alarm.Threshold}, Activated At: {alarm.ActivationTime}");
+            }
         }
 
         public bool Registration(string username, string password)

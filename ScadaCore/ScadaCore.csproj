@@ -210,10 +210,16 @@
     <Reference Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="AlarmService.svc" />
     <Content Include="Authentication.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm.cs" />
+    <Compile Include="AlarmService.svc.cs">
+      <DependentUpon>AlarmService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="IAlarmService.cs" />
     <Compile Include="ISimpleService.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.Designer.cs">

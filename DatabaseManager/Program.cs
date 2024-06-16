@@ -1,4 +1,5 @@
 ﻿using ServiceReference1;
+using ServiceReference2;
 using System;
 using System.Threading.Tasks;
 
@@ -10,6 +11,7 @@ namespace DatabaseManager
         {
             SimpleServiceClient proxy = new SimpleServiceClient();
             AuthenticationClient authProxy = new AuthenticationClient();
+            AlarmServiceClient alarmProxy = new AlarmServiceClient();
 
             string token = null;
 
@@ -26,9 +28,10 @@ namespace DatabaseManager
                 {
                     Console.WriteLine("Choose an option:");
                     Console.WriteLine("1. Get Authenticated Message");
-                    Console.WriteLine("2. Logout");
-                    Console.WriteLine("3. Exit");
-                    //TODO: add functionalities here
+                    Console.WriteLine("2. Add Alarm");
+                    Console.WriteLine("3. Remove Alarm");
+                    Console.WriteLine("4. Logout");
+                    Console.WriteLine("5. Exit");
                 }
 
                 var choice = Console.ReadLine();
@@ -89,6 +92,28 @@ namespace DatabaseManager
                     }
                     else if (choice == "2")
                     {
+                        Console.Write("Enter tag name: ");
+                        var tagName = Console.ReadLine();
+                        Console.Write("Enter alarm type (High/Low): ");
+                        var type = Console.ReadLine();
+                        Console.Write("Enter priority (1-3): ");
+                        var priority = int.Parse(Console.ReadLine());
+                        Console.Write("Enter threshold: ");
+                        var threshold = double.Parse(Console.ReadLine());
+
+                        await alarmProxy.AddAlarmAsync(tagName, type, priority, threshold);
+                        Console.WriteLine("Alarm added successfully.");
+                    }
+                    else if (choice == "3")
+                    {
+                        Console.Write("Enter tag name: ");
+                        var tagName = Console.ReadLine();
+
+                        await alarmProxy.RemoveAlarmAsync(tagName);
+                        Console.WriteLine("Alarm removed successfully.");
+                    }
+                    else if (choice == "4")
+                    {
                         bool success = await authProxy.LogoutAsync(token);
                         if (success)
                         {
@@ -100,14 +125,14 @@ namespace DatabaseManager
                             Console.WriteLine("Logout failed.");
                         }
                     }
-                    else if (choice == "3")
+                    else if (choice == "5")
                     {
                         Console.WriteLine("Exiting the program.");
                         break;
                     }
                     else
                     {
-                        Console.WriteLine("Invalid choice. Please choose 1, 2, or 3.");
+                        Console.WriteLine("Invalid choice. Please choose 1, 2, 3, 4, or 5.");
                     }
                 }
 

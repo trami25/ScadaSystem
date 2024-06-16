@@ -1,4 +1,5 @@
-﻿using ScadaCore.Tags.Model;
+﻿using DriverApi;
+using ScadaCore.Tags.Model;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,16 +11,20 @@ namespace ScadaCore.Configuration
 {
     public class ScadaConfiguration
     {
-        private XDocument Xml { get; }
+        private readonly XDocument _xml;
+        private readonly IDriver _simulationDriver;
+        private readonly IDriver _rtuDriver;
 
-        public ScadaConfiguration(string configPath)
+        public ScadaConfiguration(string configPath, IDriver simulationDriver, IDriver rtuDriver)
         {
-            Xml = XDocument.Load(configPath);
+            _xml = XDocument.Load(configPath);
+            _simulationDriver = simulationDriver;
+            _rtuDriver = rtuDriver;
         }
 
         public ICollection<Tag> GetTags()
         {
-            var tags = Xml.Element("tags").Elements();
+            var tags = _xml.Element("tags").Elements();
             var tagList = new List<Tag>();
 
             foreach (var tag in tags)
@@ -33,7 +38,8 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("ioAddress").Value,
                                 Convert.ToDouble(tag.Value),
                                 Convert.ToDouble(tag.Attribute("scanTime").Value),
-                                Convert.ToBoolean(tag.Attribute("isScanOn").Value)
+                                Convert.ToBoolean(tag.Attribute("isScanOn").Value),
+                                tag.Attribute("driver").Value == "simulation" ? _simulationDriver : _rtuDriver
                             ));
                         break;
                     case "do":
@@ -55,7 +61,8 @@ namespace ScadaCore.Configuration
                                 Convert.ToBoolean(tag.Attribute("isScanOn").Value),
                                 Convert.ToDouble(tag.Attribute("lowLimit").Value),
                                 Convert.ToDouble(tag.Attribute("highLimit").Value),
-                                (Unit)Enum.Parse(typeof(Unit), tag.Attribute("unit").Value)
+                                (Unit)Enum.Parse(typeof(Unit), tag.Attribute("unit").Value),
+                                tag.Attribute("driver").Value == "simulation" ? _simulationDriver : _rtuDriver
                             ));
                         break;
                     case "ao":

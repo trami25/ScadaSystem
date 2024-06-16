@@ -60,9 +60,17 @@
     <Content Include="scadaTestConfig.xml" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DriverApi\DriverApi.csproj">
+      <Project>{3127ef2c-d932-4317-88c0-f775f8471c1d}</Project>
+      <Name>DriverApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScadaCore\ScadaCore.csproj">
       <Project>{1b8dac8c-922b-489c-891a-1646c765f794}</Project>
       <Name>ScadaCore</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SimulationDriver\SimulationDriver.csproj">
+      <Project>{6c4e4e4a-9849-4b19-b124-6a52136a6e9a}</Project>
+      <Name>SimulationDriver</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets" Condition="Exists('$(VSToolsPath)\TeamTest\Microsoft.TestTools.targets')" />

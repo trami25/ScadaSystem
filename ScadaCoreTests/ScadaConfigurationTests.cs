@@ -4,32 +4,35 @@ using ScadaCore.Configuration;
 using ScadaCore.Tags.Model;
 using System.Collections.Generic;
 using System.Linq;
+using SimulationDriver;
 
 namespace ScadaCoreTests
 {
     [TestClass]
     public class ScadaConfigurationTests
     {
-        public static ScadaConfiguration ScadaConfiguration { get; private set; }
-        public static List<Tag> Tags { get; private set; }
+        private static ScadaConfiguration _scadaConfiguration;
+        private static List<Tag> _tags;
+        private static MainSimulationDriver _simulationDriver;
 
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            ScadaConfiguration = new ScadaConfiguration(@"../../scadaTestConfig.xml");
-            Tags = ScadaConfiguration.GetTags().ToList();
+            _simulationDriver = new MainSimulationDriver();
+            _scadaConfiguration = new ScadaConfiguration(@"../../scadaTestConfig.xml", _simulationDriver, _simulationDriver);
+            _tags = _scadaConfiguration.GetTags().ToList();
         }
 
         [TestMethod]
         public void ShouldReturnCorrectSizeOfList()
         {
-            Assert.AreEqual(4, Tags.Count);
+            Assert.AreEqual(4, _tags.Count);
         }
 
         [TestMethod]
         public void TagShouldHaveCorrectAttributes()
         {
-            var tag = (AnalogOutputTag)Tags.Where(t => t.Id == "ao1").First();
+            var tag = (AnalogOutputTag)_tags.Where(t => t.Id == "ao1").First();
 
             Assert.IsNotNull(tag);
             Assert.AreEqual("deabc", tag.IOAddress);

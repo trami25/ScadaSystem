@@ -2,6 +2,7 @@
 using ScadaCore.Configuration;
 using ScadaCore.Tags;
 using ScadaCore.Tags.Model;
+using SimulationDriver;
 using System;
 
 namespace ScadaCoreTests
@@ -9,20 +10,22 @@ namespace ScadaCoreTests
     [TestClass]
     public class TagRepositoryTests
     {
-        private ScadaConfiguration configuration;
-        private TagRepository tagRepository;
+        private ScadaConfiguration _configuration;
+        private TagRepository _tagRepository;
+        private MainSimulationDriver _simulationDriver;
 
         [TestInitialize]
         public void Setup()
         {
-            configuration = new ScadaConfiguration(@"../../scadaTestConfig.xml");
-            tagRepository = new TagRepository(configuration);
+            _simulationDriver = new MainSimulationDriver();
+            _configuration = new ScadaConfiguration(@"../../scadaTestConfig.xml", _simulationDriver, _simulationDriver);
+            _tagRepository = new TagRepository(_configuration);
         }
 
         [TestMethod]
         public void ShouldReturnAllTags()
         {
-            var tags = tagRepository.GetAll();
+            var tags = _tagRepository.GetAll();
 
             Assert.AreEqual(4, tags.Count);
         }
@@ -30,7 +33,7 @@ namespace ScadaCoreTests
         [TestMethod]
         public void ShouldReturnTag()
         {
-            var tag = tagRepository.GetById("ao1");
+            var tag = _tagRepository.GetById("ao1");
 
             Assert.IsNotNull(tag);
         }
@@ -38,7 +41,7 @@ namespace ScadaCoreTests
         [TestMethod]
         public void ShouldReturnNull()
         {
-            var tag = tagRepository.GetById("aaaa");
+            var tag = _tagRepository.GetById("aaaa");
 
             Assert.IsNull(tag);
         }
@@ -47,8 +50,8 @@ namespace ScadaCoreTests
         public void ShouldCreateTag()
         {
             var tag = new DigitalOutputTag("aaa", "test", "abc", 25.0, 10.0);
-            tagRepository.Create(tag);
-            var newTag = tagRepository.GetById("aaa");
+            _tagRepository.Create(tag);
+            var newTag = _tagRepository.GetById("aaa");
 
             Assert.IsNotNull(newTag);
             Assert.AreEqual(tag.Id, newTag.Id);
@@ -59,14 +62,14 @@ namespace ScadaCoreTests
         {
             var tag = new DigitalOutputTag("di1", "test", "abc", 25.0, 10.0);
 
-            Assert.ThrowsException<ArgumentException>(() => tagRepository.Create(tag));
+            Assert.ThrowsException<ArgumentException>(() => _tagRepository.Create(tag));
         }
 
         [TestMethod]
         public void ShouldDeleteTag()
         {
-            tagRepository.Delete("ao1");
-            var tags = tagRepository.GetAll();
+            _tagRepository.Delete("ao1");
+            var tags = _tagRepository.GetAll();
 
             Assert.AreEqual(3, tags.Count);
         }
@@ -74,10 +77,10 @@ namespace ScadaCoreTests
         [TestMethod]
         public void ShouldUpdateTag()
         {
-            var tag = tagRepository.GetById("do1");
+            var tag = _tagRepository.GetById("do1");
             tag.Value = 50.0;
-            tagRepository.Update(tag.Id, tag);
-            var updatedTag = tagRepository.GetById("do1");
+            _tagRepository.Update(tag.Id, tag);
+            var updatedTag = _tagRepository.GetById("do1");
 
             Assert.IsNotNull(updatedTag);
             Assert.AreEqual(tag.Id, updatedTag.Id);

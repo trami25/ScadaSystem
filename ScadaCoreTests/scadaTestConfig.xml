@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <tags>
-	<di id="di1" description="Digital input tag." ioAddress="abcde" scanTime="5.0" isScanOn="true">41.0</di>
-	<do id="do1" description="Digital output tag." ioAddress="bcdea" initialValue="10.0">420.0</do>
-	<ai id="ai1" description="Analog input tag." ioAddress="cdeab" scanTime="5.0" isScanOn="false" lowLimit="-5.5" highLimit="99.3" unit="Ms">25.4</ai>
-	<ao id="ao1" description="Analog output tag." ioAddress="deabc" initialValue="15.4" lowLimit="5.0" highLimit="150.0" unit="Kg">111.11</ao>
+	<di id="di1" description="Digital input tag." ioAddress="abcde" scanTime="5.0" isScanOn="true" driver="simulation">41.0</di>
+	<do id="do1" description="Digital output tag." ioAddress="bcdea" initialValue="10.0" driver="simulation">420.0</do>
+	<ai id="ai1" description="Analog input tag." ioAddress="cdeab" scanTime="5.0" isScanOn="false" lowLimit="-5.5" highLimit="99.3" unit="Ms" driver="simulation">25.4</ai>
+	<ao id="ao1" description="Analog output tag." ioAddress="deabc" initialValue="15.4" lowLimit="5.0" highLimit="150.0" unit="Kg" driver="simulation">111.11</ao>
 </tags>

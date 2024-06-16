@@ -5,11 +5,13 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScadaCore", "ScadaCore\ScadaCore.csproj", "{1B8DAC8C-922B-489C-891A-1646C765F794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTDriver", "RTDriver\RTDriver.csproj", "{885C911F-28E1-4B47-93E1-9DFC2F8ACF4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTDriver", "RTDriver\RTDriver.csproj", "{885C911F-28E1-4B47-93E1-9DFC2F8ACF4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnit\RTUnit.csproj", "{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RTUnit", "RTUnit\RTUnit.csproj", "{53DCEDF1-5E00-4180-BFF0-6EA0CDFAD698}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "KeyGeneratorApp", "KeyGeneratorApp\KeyGeneratorApp.csproj", "{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "KeyGeneratorApp", "KeyGeneratorApp\KeyGeneratorApp.csproj", "{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTDriverService", "RTDriverService\RTDriverService.csproj", "{835E97A7-AE7B-43AE-8CE3-6EC6538E0116}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CF3AC9D-0082-424A-A2B1-F821FAAB7EB4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{835E97A7-AE7B-43AE-8CE3-6EC6538E0116}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{835E97A7-AE7B-43AE-8CE3-6EC6538E0116}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{835E97A7-AE7B-43AE-8CE3-6EC6538E0116}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{835E97A7-AE7B-43AE-8CE3-6EC6538E0116}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

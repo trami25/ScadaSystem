@@ -3,54 +3,76 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading;
-using RTDriver;
+using System;
+using System.IO;
+using System.ServiceModel;
+using System.Threading;
+using ServiceReference1;
 
 namespace RTUnit
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            Console.WriteLine("Unesite adresu (primer: 127.0.0.1):");
+            Console.Write("Enter address: ");
             string address = Console.ReadLine();
-
-            Console.WriteLine("Unesite ID RTU-a:");
+            Console.Write("Enter RTU ID: ");
             string rtuId = Console.ReadLine();
-
-            Console.WriteLine("Unesite donju granicu:");
+            Console.Write("Enter lower limit: ");
             double lowerLimit = double.Parse(Console.ReadLine());
-
-            Console.WriteLine("Unesite gornju granicu:");
+            Console.Write("Enter upper limit: ");
             double upperLimit = double.Parse(Console.ReadLine());
 
-            RTDriver.RTDriver driver = new RTDriver.RTDriver();
-            byte[] privateKey = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privateKey.pem");
-
-            Random random = new Random();
-            while (true)
+            // Učitavanje privatnog ključa
+            using (RTDriverServiceClient driver = new RTDriverServiceClient())
             {
-                double value = random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
-                string message = $"{address}:{value}";
+                byte[] privateKeyBytes = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privateKey.pem");
+                RSAParameters privateKeyParams = LoadPrivateKey(privateKeyBytes);
 
-                byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-                byte[] signedMessage = SignMessage(messageBytes, privateKey);
+                Random random = new Random();
+                Task.Run(async () =>
+                {
+                    while (true)
+                    {
+                        double value = random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
+                        string message = $"{address}:{value}";
 
-                driver.ReceiveData(address, value, signedMessage);
+                        byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+                        byte[] signedMessage = SignMessage(messageBytes, privateKeyParams);
 
-                Thread.Sleep(10000); // slanje poruke na svakih 10 sec
+                        // Ovde pozivate servis sa potpisanim podacima
+                        await driver.ReceiveDataAsync(address, value, signedMessage);
+
+                        Thread.Sleep(10000);
+                    }
+                }).GetAwaiter().GetResult();
+
             }
         }
 
-        public static byte[] SignMessage(byte[] message, byte[] privateKey)
+        public static byte[] SignMessage(byte[] message, RSAParameters privateKey)
         {
-            using (var rsa = new RSACryptoServiceProvider())
+            using (var rsa = RSA.Create())
             {
-                rsa.ImportRSAPrivateKey(privateKey, out _);
+                rsa.ImportParameters(privateKey);
                 return rsa.SignData(message, HashAlgorithmName.SHA256, RSASignaturePadding.Pkcs1);
             }
         }
+
+        public static RSAParameters LoadPrivateKey(byte[] privateKeyBytes)
+        {
+            using (var rsa = RSA.Create())
+            {
+                rsa.ImportRSAPrivateKey(privateKeyBytes, out _);
+                return rsa.ExportParameters(true);
+            }
+        }
+
+
     }
 }
+
 
 
 

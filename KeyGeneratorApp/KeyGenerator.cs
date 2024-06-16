@@ -6,22 +6,26 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
 
+using System;
+using System.IO;
+
 namespace KeyGeneratorApp
 {
-
     public class KeyGenerator
     {
         public static void GenerateKeys()
         {
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            using (RSA rsa = RSA.Create(2048)) // Koristimo RSA.Create umesto RSACryptoServiceProvider
             {
-                var privateKey = rsa.ExportRSAPrivateKey();
-                var publicKey = rsa.ExportRSAPublicKey();
+                // Izvoz privatnog ključa u formatu PKCS#1
+                byte[] privateKeyBytes = rsa.ExportRSAPrivateKey();
+                File.WriteAllBytes("privateKey.pem", privateKeyBytes);
 
-                File.WriteAllBytes("privateKey.pem", privateKey);
-                File.WriteAllBytes("publicKey.pem", publicKey);
+                // Izvoz javnog ključa u formatu X.509 SubjectPublicKeyInfo
+                byte[] publicKeyBytes = rsa.ExportRSAPublicKey();
+                File.WriteAllBytes("publicKey.pem", publicKeyBytes);
             }
         }
     }
-
 }
+

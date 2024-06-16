@@ -8,7 +8,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\RTDriver\RTDriver.csproj" />
+    <PackageReference Include="Microsoft.Extensions.ApiDescription.Client" Version="7.0.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    <PackageReference Include="NSwag.ApiDescription.Client" Version="13.18.2">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="System.ServiceModel.Duplex" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Federation" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Http" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.NetTcp" Version="6.0.*" />
+    <PackageReference Include="System.ServiceModel.Security" Version="6.0.*" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RTDriverService\RTDriverService.csproj" />
   </ItemGroup>
 
 </Project>

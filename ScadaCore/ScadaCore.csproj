@@ -75,8 +75,10 @@
     <Compile Include="Tags\Model\AnalogOutputTag.cs" />
     <Compile Include="Tags\Model\DigitalInputTag.cs" />
     <Compile Include="Tags\Model\DigitalOutputTag.cs" />
+    <Compile Include="Tags\Model\InputTag.cs" />
     <Compile Include="Tags\Model\Tag.cs" />
     <Compile Include="Tags\Model\Unit.cs" />
+    <Compile Include="Tags\TagProcessor.cs" />
     <Compile Include="Tags\TagRepository.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -9,6 +9,7 @@ using System.Xml.Linq;
 
 namespace ScadaCore.Configuration
 {
+    // TODO: Add save on close
     public class ScadaConfiguration
     {
         private readonly XDocument _xml;
@@ -37,7 +38,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
                                 Convert.ToDouble(tag.Value),
-                                Convert.ToDouble(tag.Attribute("scanTime").Value),
+                                Convert.ToInt32(tag.Attribute("scanTime").Value),
                                 Convert.ToBoolean(tag.Attribute("isScanOn").Value),
                                 tag.Attribute("driver").Value == "simulation" ? _simulationDriver : _rtuDriver
                             ));
@@ -57,7 +58,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
                                 Convert.ToDouble(tag.Value),
-                                Convert.ToDouble(tag.Attribute("scanTime").Value),
+                                Convert.ToInt32(tag.Attribute("scanTime").Value),
                                 Convert.ToBoolean(tag.Attribute("isScanOn").Value),
                                 Convert.ToDouble(tag.Attribute("lowLimit").Value),
                                 Convert.ToDouble(tag.Attribute("highLimit").Value),

@@ -51,6 +51,7 @@
   <ItemGroup>
     <Compile Include="ScadaConfigurationTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TagProcessorTests.cs" />
     <Compile Include="TagRepositoryTests.cs" />
   </ItemGroup>
   <ItemGroup>

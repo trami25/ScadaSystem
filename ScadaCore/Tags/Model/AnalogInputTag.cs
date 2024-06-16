@@ -6,23 +6,17 @@ using System.Web;
 
 namespace ScadaCore.Tags.Model
 {
-    public class AnalogInputTag : Tag
+    public class AnalogInputTag : InputTag
     {
-        public double ScanTime { get; set; } // In milliseconds
-        public bool IsScanOn { get; set;  }
         public double LowLimit { get; set; }
         public double HighLimit { get; set; }
         public Unit Unit { get; }
-        public IDriver Driver { get; }
 
-        public AnalogInputTag(string id, string description, string ioAddress, double value, double scanTime, bool isScanOn, double lowLimit, double highLimit, Unit unit, IDriver driver) : base(id, description, ioAddress, value)
+        public AnalogInputTag(string id, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, Unit unit, IDriver driver) : base(id, description, ioAddress, value, scanTime, isScanOn, driver)
         {
-            ScanTime = scanTime;
-            IsScanOn = isScanOn;
             LowLimit = lowLimit;
             HighLimit = highLimit;
             Unit = unit;
-            Driver = driver;
         }
     }
 }

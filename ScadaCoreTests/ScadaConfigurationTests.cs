@@ -17,7 +17,7 @@ namespace ScadaCoreTests
         public static void Setup(TestContext context)
         {
             ScadaConfiguration = new ScadaConfiguration(@"../../scadaTestConfig.xml");
-            Tags = ScadaConfiguration.getTags().ToList();
+            Tags = ScadaConfiguration.GetTags().ToList();
         }
 
         [TestMethod]
@@ -35,6 +35,7 @@ namespace ScadaCoreTests
             Assert.AreEqual("deabc", tag.IOAddress);
             Assert.AreEqual(15.4, tag.InitialValue);
             Assert.AreEqual(Unit.Kg, tag.Unit);
+            Assert.AreEqual(111.11, tag.Value);
         }
     }
 }

@@ -17,7 +17,7 @@ namespace ScadaCore.Configuration
             Xml = XDocument.Load(configPath);
         }
 
-        public ICollection<Tag> getTags()
+        public ICollection<Tag> GetTags()
         {
             var tags = Xml.Element("tags").Elements();
             var tagList = new List<Tag>();

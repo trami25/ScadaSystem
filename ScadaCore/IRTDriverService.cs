@@ -12,7 +12,7 @@ namespace ScadaCore
     public interface IRTDriverService
     {
         [OperationContract]
-        void ReceiveData(string address, double value, byte[] signedMessage);
+        string ReceiveData(string address, double value); //, byte[] signedMessage
     }
 
 }

@@ -20,23 +20,24 @@ namespace ScadaCore
 
         public Service1()
         {
-            string publicKeyPath = "C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\ScadaCore\\publickey1.pem";
-            publicKey = LoadPublicKeyFromPem(publicKeyPath);
+            //string publicKeyPath = "C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\ScadaCore\\publickey1.pem";
+            //publicKey = LoadPublicKeyFromPem(publicKeyPath);
         }
 
-        public void ReceiveData(string address, double value, byte[] signedMessage)
+        public string ReceiveData(string address, double value)  //, byte[] signedMessage
         {
             string message = $"{address}:{value}";
-            byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+            //byte[] messageBytes = Encoding.UTF8.GetBytes(message);
 
-            if (VerifyMessage(messageBytes, signedMessage, publicKey))
-            {
+            //if (VerifyMessage(messageBytes, signedMessage, publicKey))
+            //{
                 Console.WriteLine($"Received and verified value {value} at address {address}");
-            }
-            else
-            {
-                Console.WriteLine($"Verification failed for value {value} at address {address}");
-            }
+            return message;
+            //}
+            //else
+            //{
+                //Console.WriteLine($"Verification failed for value {value} at address {address}");
+            //}
         }
 
         public static bool VerifyMessage(byte[] message, byte[] signedMessage, RSAParameters publicKey)

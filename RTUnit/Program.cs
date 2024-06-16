@@ -27,26 +27,27 @@ namespace RTUnit
             // Učitavanje privatnog ključa
             using (RTDriverServiceClient driver = new RTDriverServiceClient())
             {
-                byte[] privateKeyBytes = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privatekey1.pem");
-                RSAParameters privateKeyParams = LoadPrivateKey(privateKeyBytes);
+                //byte[] privateKeyBytes = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privatekey1.pem");
+                //RSAParameters privateKeyParams = LoadPrivateKey(privateKeyBytes);
 
                 Random random = new Random();
-                Task.Run(async () =>
+                await Task.Run(async () =>
                 {
                     while (true)
                     {
                         double value = random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
                         string message = $"{address}:{value}";
 
-                        byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-                        byte[] signedMessage = SignMessage(messageBytes, privateKeyParams);
+                        //byte[] messageBytes = Encoding.UTF8.GetBytes(message);
+                        //byte[] signedMessage = SignMessage(messageBytes, privateKeyParams);
 
-                        // Ovde pozivate servis sa potpisanim podacima
-                        await driver.ReceiveDataAsync(address, value, signedMessage);
+                        string mess= await driver.ReceiveDataAsync(address, value);
+                        Console.WriteLine($"Received and verified value at address { mess}");
+                        // await driver.ReceiveDataAsync(address, value, signedMessage);
 
                         Thread.Sleep(10000);
                     }
-                }).GetAwaiter().GetResult();
+                });
 
             }
         }

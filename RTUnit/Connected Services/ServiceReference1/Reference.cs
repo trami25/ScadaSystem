@@ -172,7 +172,7 @@ namespace ServiceReference1
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRTDriverService/ReceiveData", ReplyAction="http://tempuri.org/IRTDriverService/ReceiveDataResponse")]
-        System.Threading.Tasks.Task ReceiveDataAsync(string address, double value, byte[] signedMessage);
+        System.Threading.Tasks.Task<string> ReceiveDataAsync(string address, double value);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -225,9 +225,9 @@ namespace ServiceReference1
         {
         }
         
-        public System.Threading.Tasks.Task ReceiveDataAsync(string address, double value, byte[] signedMessage)
+        public System.Threading.Tasks.Task<string> ReceiveDataAsync(string address, double value)
         {
-            return base.Channel.ReceiveDataAsync(address, value, signedMessage);
+            return base.Channel.ReceiveDataAsync(address, value);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

@@ -13,7 +13,7 @@ namespace ScadaCore.Tags.Model
         public double HighLimit { get; set; }
         public Unit Unit { get; }
 
-        public AnalogInputTag(string id, string description, string ioAddress, double scanTime, bool isScanOn, double lowLimit, double highLimit, Unit unit) : base(id, description, ioAddress)
+        public AnalogInputTag(string id, string description, string ioAddress, double value, double scanTime, bool isScanOn, double lowLimit, double highLimit, Unit unit) : base(id, description, ioAddress, value)
         {
             ScanTime = scanTime;
             IsScanOn = isScanOn;

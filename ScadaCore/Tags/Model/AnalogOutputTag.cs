@@ -12,7 +12,7 @@ namespace ScadaCore.Tags.Model
         public double HighLimit { get; set; }
         public Unit Unit { get; }
 
-        public AnalogOutputTag(string id, string description, string ioAddress, double initialValue, double lowLimit, double highLimit, Unit unit) : base(id, description, ioAddress)
+        public AnalogOutputTag(string id, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, Unit unit) : base(id, description, ioAddress, value)
         {
             InitialValue = initialValue;
             LowLimit = lowLimit;

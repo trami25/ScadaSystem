@@ -10,7 +10,7 @@ namespace ScadaCore.Tags.Model
         public double ScanTime { get; set; } // In milliseconds
         public bool IsScanOn { get; set; }
 
-        public DigitalInputTag(string id, string description, string ioAddress, double scanTime, bool isScanOn) : base(id, description, ioAddress)
+        public DigitalInputTag(string id, string description, string ioAddress, double value, double scanTime, bool isScanOn) : base(id, description, ioAddress, value)
         {
             ScanTime = scanTime;
             IsScanOn = isScanOn;

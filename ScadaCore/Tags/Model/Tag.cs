@@ -10,12 +10,14 @@ namespace ScadaCore.Tags.Model
         public string Id { get; }
         public string Description { get; }
         public string IOAddress { get; }
+        public double Value { get; set; }
 
-        protected Tag(string id, string description, string iOAddress)
+        protected Tag(string id, string description, string iOAddress, double value)
         {
             Id = id;
             Description = description;
             IOAddress = iOAddress;
+            Value = value;
         }
     }
 }

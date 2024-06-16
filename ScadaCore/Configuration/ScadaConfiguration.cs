@@ -19,8 +19,6 @@ namespace ScadaCore.Configuration
 
         public ICollection<Tag> getTags()
         {
-            // TODO: Load tag values to tag objects
-
             var tags = Xml.Element("tags").Elements();
             var tagList = new List<Tag>();
 
@@ -33,6 +31,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("id").Value,
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
+                                Convert.ToDouble(tag.Value),
                                 Convert.ToDouble(tag.Attribute("scanTime").Value),
                                 Convert.ToBoolean(tag.Attribute("isScanOn").Value)
                             ));
@@ -42,6 +41,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("id").Value,
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
+                                Convert.ToDouble(tag.Value),
                                 Convert.ToDouble(tag.Attribute("initialValue").Value)
                             ));
                         break;
@@ -50,6 +50,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("id").Value,
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
+                                Convert.ToDouble(tag.Value),
                                 Convert.ToDouble(tag.Attribute("scanTime").Value),
                                 Convert.ToBoolean(tag.Attribute("isScanOn").Value),
                                 Convert.ToDouble(tag.Attribute("lowLimit").Value),
@@ -62,6 +63,7 @@ namespace ScadaCore.Configuration
                                 tag.Attribute("id").Value,
                                 tag.Attribute("description").Value,
                                 tag.Attribute("ioAddress").Value,
+                                Convert.ToDouble(tag.Value),
                                 Convert.ToDouble(tag.Attribute("initialValue").Value),
                                 Convert.ToDouble(tag.Attribute("lowLimit").Value),
                                 Convert.ToDouble(tag.Attribute("highLimit").Value),

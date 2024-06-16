@@ -27,7 +27,7 @@ namespace RTUnit
             // Učitavanje privatnog ključa
             using (RTDriverServiceClient driver = new RTDriverServiceClient())
             {
-                byte[] privateKeyBytes = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privateKey.pem");
+                byte[] privateKeyBytes = File.ReadAllBytes("C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\RTUnit\\privatekey1.pem");
                 RSAParameters privateKeyParams = LoadPrivateKey(privateKeyBytes);
 
                 Random random = new Random();

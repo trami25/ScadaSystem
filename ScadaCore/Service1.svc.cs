@@ -20,7 +20,7 @@ namespace ScadaCore
 
         public Service1()
         {
-            string publicKeyPath = "C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\ScadaCore\\publicKey.pem";
+            string publicKeyPath = "C:\\Users\\korisnik\\Desktop\\novo\\ScadaSystem\\ScadaCore\\publickey1.pem";
             publicKey = LoadPublicKeyFromPem(publicKeyPath);
         }
 
@@ -50,63 +50,102 @@ namespace ScadaCore
 
         public static RSAParameters LoadPublicKeyFromPem(string publicKeyPath)
         {
-            try
+            // Read the entire PEM file into a string
+            string pem = File.ReadAllText(publicKeyPath);
+
+            // Remove the header, footer, and whitespace
+            pem = pem.Replace("-----BEGIN PUBLIC KEY-----", "")
+                     .Replace("-----END PUBLIC KEY-----", "")
+                     .Replace("\n", "")
+                     .Replace("\r", "")
+                     .Trim();
+
+            // Convert the Base64 string to a byte array
+            byte[] publicKeyBytes = Convert.FromBase64String(pem);
+
+            // Use a MemoryStream to read the byte array
+            using (var ms = new MemoryStream(publicKeyBytes))
             {
-                var pem = File.ReadAllText(publicKeyPath);
-
-                // Uklonite BEGIN i END oznake i praznine
-                var base64Content = pem
-                    .Replace("-----BEGIN PUBLIC KEY-----", "")
-                    .Replace("-----END PUBLIC KEY-----", "")
-                    .Replace("\n", "")
-                    .Replace("\r", "")
-                    .Trim();
-
-                // Provera minimalne dužine za očekivani javni ključ
-                if (base64Content.Length < 50)
+                using (var reader = new BinaryReader(ms))
                 {
-                    throw new InvalidOperationException("Invalid public key length");
-                }
-
-                // Dekodiranje Base64 stringa
-                byte[] publicKeyBytes;
-                try
-                {
-                    publicKeyBytes = Convert.FromBase64String(base64Content);
-                }
-                catch (FormatException ex)
-                {
-                    throw new FormatException("Invalid Base64 string format", ex);
-                }
-
-                // Provera da li su dekodirani bajtovi neprazni
-                if (publicKeyBytes.Length == 0)
-                {
-                    throw new InvalidOperationException("Invalid public key content");
-                }
-
-                using (var ms = new MemoryStream(publicKeyBytes))
-                {
-                    using (var reader = new BinaryReader(ms))
+                    // Check if the first byte is 0x30 (indicating an ASN.1 sequence)
+                    byte bt = reader.ReadByte();
+                    if (bt == 0x30)
                     {
-                        // Ostatak vaše implementacije...
-                        byte byte1 = reader.ReadByte();
-                        // ...
-                        // Ostatak koda za učitavanje RSA parametara
+                        // Read the ASN.1 length
+                        ReadLength(reader);
+
+                        // Check for another 0x30 indicating a nested sequence
+                        bt = reader.ReadByte();
+                        if (bt == 0x30)
+                        {
+                            // Read the nested ASN.1 length
+                            ReadLength(reader);
+
+                            // Skip the object identifier (2 bytes)
+                            reader.ReadBytes(2);
+
+                            // Check for the bit string tag (0x03)
+                            bt = reader.ReadByte();
+                            if (bt == 0x03)
+                            {
+                                // Read the length of the bit string
+                                ReadLength(reader);
+
+                                // Skip the null byte
+                                reader.ReadByte();
+
+                                // Check for another 0x30 indicating the RSA key sequence
+                                bt = reader.ReadByte();
+                                if (bt == 0x30)
+                                {
+                                    // Read the length of the RSA key sequence
+                                    ReadLength(reader);
+
+                                    // Read the modulus and exponent
+                                    var modulus = ReadInteger(reader);
+                                    var exponent = ReadInteger(reader);
+
+                                    // Return the RSA parameters
+                                    return new RSAParameters { Modulus = modulus, Exponent = exponent };
+                                }
+                            }
+                        }
                     }
                 }
+            }
 
-                // Vraćanje RSA parametara ako je sve prošlo bez greške
-                return new RSAParameters
-                {
-                    // Postavite RSA parametre ovde
-                };
-            }
-            catch (Exception ex)
+            // Throw an exception if the PEM file format is invalid
+            throw new InvalidOperationException("Invalid PEM file format.");
+        }
+
+        private static byte[] ReadInteger(BinaryReader reader)
+        {
+            // Read the length of the integer
+            int length = ReadLength(reader);
+
+            // Read the bytes of the integer
+            byte[] bytes = reader.ReadBytes(length);
+            return bytes;
+        }
+
+        private static int ReadLength(BinaryReader reader)
+        {
+            // Read the length of the ASN.1 element
+            int length = reader.ReadByte();
+
+            if (length == 0x81)
             {
-                Console.WriteLine($"Error loading public key: {ex.Message}");
-                throw;
+                // Length is in the next byte
+                length = reader.ReadByte();
             }
+            else if (length == 0x82)
+            {
+                // Length is in the next two bytes
+                length = (reader.ReadByte() << 8) | reader.ReadByte();
+            }
+
+            return length;
         }
 
 

@@ -78,6 +78,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="publicKey.pem" />
+    <Content Include="publickey1.pem" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

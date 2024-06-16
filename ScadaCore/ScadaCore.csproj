@@ -229,10 +229,8 @@
     <Compile Include="PBKDF2.cs" />
     <Compile Include="Authentication.svc.cs">
       <DependentUpon>Authentication.svc</DependentUpon>
-    <Compile Include="Configuration\ScadaConfiguration.cs" />
-    <Compile Include="Service1.svc.cs">
-      <DependentUpon>Service1.svc</DependentUpon>
     </Compile>
+    <Compile Include="Configuration\ScadaConfiguration.cs" />
     <Compile Include="IAuthentication.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

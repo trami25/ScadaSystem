@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SimulationDriver", "Simulat
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScadaCoreTests", "ScadaCoreTests\ScadaCoreTests.csproj", "{6FB6511B-9902-460A-AFA6-15B322D8D324}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverApi", "DriverApi\DriverApi.csproj", "{3127EF2C-D932-4317-88C0-F775F8471C1D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -23,14 +25,14 @@ Global
 		{6C4E4E4A-9849-4B19-B124-6A52136A6E9A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C4E4E4A-9849-4B19-B124-6A52136A6E9A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C4E4E4A-9849-4B19-B124-6A52136A6E9A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3321F14C-5519-4582-ABE9-510C93190DF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3321F14C-5519-4582-ABE9-510C93190DF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3321F14C-5519-4582-ABE9-510C93190DF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3321F14C-5519-4582-ABE9-510C93190DF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6FB6511B-9902-460A-AFA6-15B322D8D324}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6FB6511B-9902-460A-AFA6-15B322D8D324}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6FB6511B-9902-460A-AFA6-15B322D8D324}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6FB6511B-9902-460A-AFA6-15B322D8D324}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DriverApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace SimulationDriver
 {
-    public static class MainSimulationDriver
+    public class MainSimulationDriver : IDriver
     {
-        public static double ReturnValue(String address)
+        public double ReturnValue(string address)
         {
             if (address == "S") return Sine();
             else if (address == "C") return Cosine();

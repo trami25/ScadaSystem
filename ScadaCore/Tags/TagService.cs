@@ -22,7 +22,7 @@ namespace ScadaCore.Tags
 
         private void InitializeTasks()
         {
-            var tags = _repository.GetInputTags();
+            var tags = _repository.GetInputTags().Where(t => t.IsScanOn);
 
             foreach (var tag in tags)
             {

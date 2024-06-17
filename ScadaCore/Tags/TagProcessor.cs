@@ -11,6 +11,7 @@ namespace ScadaCore.Tags
     public class TagProcessor
     {
         private readonly Dictionary<string, Task> _tagIdToThread = new Dictionary<string, Task>();
+        private readonly TagContext _context;
 
         public void AddTagTask(InputTag tag)
         {

@@ -22,7 +22,7 @@ namespace ScadaCoreTests
         public void ShouldAddTask()
         {
             InputTag tag = new DigitalInputTag("test", "test", "R", 4141414141.0, 1000, true, new MainSimulationDriver());
-            _processor.AddTagThread(tag);
+            _processor.AddTagTask(tag);
 
             Thread.Sleep(tag.ScanTime + 1000);
             Console.WriteLine(tag.Value);

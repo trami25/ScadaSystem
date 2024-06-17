@@ -109,6 +109,7 @@
     <Compile Include="Tags\TagContext.cs" />
     <Compile Include="Tags\TagProcessor.cs" />
     <Compile Include="Tags\TagRepository.cs" />
+    <Compile Include="Tags\TagService.cs" />
     <Compile Include="TrendingService.svc.cs">
       <DependentUpon>TrendingService.svc</DependentUpon>
     </Compile>

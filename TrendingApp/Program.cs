@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using TrendingApp.TrendingServiceReference;
 
@@ -12,11 +13,18 @@ namespace TrendingApp
         static void Main(string[] args)
         {
             TrendingServiceClient client = new TrendingServiceClient();
-            var tags = client.GetTags();
 
-            foreach (var tag in tags)
+            while (true)
             {
-                Console.WriteLine($"{tag.Id}: {tag.Value}");
+                Console.Clear();
+                var tags = client.GetTags();
+
+                foreach (var tag in tags)
+                {
+                    Console.WriteLine($"{tag.Id}: {tag.Value}");
+                }
+
+                Thread.Sleep(1000);
             }
         }
     }

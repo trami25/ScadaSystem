@@ -24,6 +24,8 @@ namespace ScadaCore
                 .RegisterSingleton<TagRepository>()
                 .RegisterSingleton<ScadaConfiguration>()
                 .RegisterType<IDriver, MainSimulationDriver>()
+                .RegisterSingleton<TagProcessor>()
+                .RegisterSingleton<TagService>()
                 .RegisterType<TagContext>(new HierarchicalLifetimeManager());
 
             container

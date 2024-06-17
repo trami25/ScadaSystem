@@ -11,17 +11,16 @@ namespace ScadaCore
 {
     public class TrendingService : ITrendingService
     {
-        private readonly TagRepository _tagRepository;
+        private readonly TagService _tagService;
 
-        public TrendingService(TagRepository tagRepository)
+        public TrendingService(TagService tagService)
         {
-            _tagRepository = tagRepository;
+            _tagService = tagService;
         }
 
         public ICollection<TagData> GetTags()
         {
-            return _tagRepository.GetAll()
-                .OfType<InputTag>()
+            return _tagService.GetInputTags()
                 .Select(t => new TagData { Id = t.Id, Value = t.Value })
                 .ToList();
         }

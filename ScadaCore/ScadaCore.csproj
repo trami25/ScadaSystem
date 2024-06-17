@@ -89,6 +89,7 @@
     <Compile Include="Tags\Model\InputTag.cs" />
     <Compile Include="Tags\Model\Tag.cs" />
     <Compile Include="Tags\Model\Unit.cs" />
+    <Compile Include="Tags\TagContext.cs" />
     <Compile Include="Tags\TagProcessor.cs" />
     <Compile Include="Tags\TagRepository.cs" />
   </ItemGroup>

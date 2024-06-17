@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace ScadaCore.Tags.Model
 {
     public abstract class Tag
     {
+        [Key]
         public string Id { get; }
         public string Description { get; }
         public string IOAddress { get; }

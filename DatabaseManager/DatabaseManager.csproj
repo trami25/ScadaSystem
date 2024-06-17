@@ -16,4 +16,10 @@
     <PackageReference Include="System.ServiceModel.Security" Version="6.0.*" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\DriverApi\DriverApi.csproj" />
+    <ProjectReference Include="..\ScadaCore\ScadaCore.csproj" />
+    <ProjectReference Include="..\SimulationDriver\SimulationDriver.csproj" />
+  </ItemGroup>
+
 </Project>

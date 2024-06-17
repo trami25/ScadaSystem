@@ -1,14 +1,14 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:64310/AlarmService.svc"
+      "http://localhost:64310/DatabaseManagementService/TagService.svc"
     ],
     "collectionTypes": [
       "System.Array",
       "System.Collections.Generic.Dictionary`2"
     ],
     "namespaceMappings": [
-      "*, ServiceReference2"
+      "*, ServiceReference4"
     ],
     "targetFramework": "net8.0",
     "typeReuseMode": "All"

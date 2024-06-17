@@ -212,12 +212,17 @@
   <ItemGroup>
     <Content Include="AlarmService.svc" />
     <Content Include="Authentication.svc" />
+    <Content Include="DatabaseManagementService\TagService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Alarm.cs" />
     <Compile Include="AlarmService.svc.cs">
       <DependentUpon>AlarmService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="DatabaseManagementService\ITagService.cs" />
+    <Compile Include="DatabaseManagementService\TagService.svc.cs">
+      <DependentUpon>TagService.svc</DependentUpon>
     </Compile>
     <Compile Include="IAlarmService.cs" />
     <Compile Include="ISimpleService.cs" />

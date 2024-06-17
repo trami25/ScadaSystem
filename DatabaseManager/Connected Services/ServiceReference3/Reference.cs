@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference2
+namespace ServiceReference3
 {
     using System.Runtime.Serialization;
     
@@ -95,7 +95,7 @@ namespace ServiceReference2
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.IAlarmService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference3.IAlarmService")]
     public interface IAlarmService
     {
         
@@ -106,17 +106,17 @@ namespace ServiceReference2
         System.Threading.Tasks.Task RemoveAlarmAsync(string tagName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmService/GetActiveAlarms", ReplyAction="http://tempuri.org/IAlarmService/GetActiveAlarmsResponse")]
-        System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetActiveAlarmsAsync();
+        System.Threading.Tasks.Task<ServiceReference3.Alarm[]> GetActiveAlarmsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IAlarmServiceChannel : ServiceReference2.IAlarmService, System.ServiceModel.IClientChannel
+    public interface IAlarmServiceChannel : ServiceReference3.IAlarmService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AlarmServiceClient : System.ServiceModel.ClientBase<ServiceReference2.IAlarmService>, ServiceReference2.IAlarmService
+    public partial class AlarmServiceClient : System.ServiceModel.ClientBase<ServiceReference3.IAlarmService>, ServiceReference3.IAlarmService
     {
         
         /// <summary>
@@ -169,7 +169,7 @@ namespace ServiceReference2
             return base.Channel.RemoveAlarmAsync(tagName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetActiveAlarmsAsync()
+        public System.Threading.Tasks.Task<ServiceReference3.Alarm[]> GetActiveAlarmsAsync()
         {
             return base.Channel.GetActiveAlarmsAsync();
         }

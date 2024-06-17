@@ -20,7 +20,10 @@ namespace ScadaCore
 
         public ICollection<TagData> GetTags()
         {
-            return _tagRepository.GetAll().Select(t => new TagData { Id = t.Id, Value = t.Value }).ToList();
+            return _tagRepository.GetAll()
+                .OfType<InputTag>()
+                .Select(t => new TagData { Id = t.Id, Value = t.Value })
+                .ToList();
         }
     }
 }

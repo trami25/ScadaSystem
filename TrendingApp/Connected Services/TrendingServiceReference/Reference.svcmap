@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="d178f9cd-2538-4c4e-b84b-1e3ee2443f79" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64310/TrendingService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="TrendingService.xsd" MetadataType="Schema" ID="62514e36-1566-4e8b-9735-4d4f7edfe319" SourceId="1" SourceUrl="http://localhost:64310/TrendingService.svc?xsd=xsd1" />
+    <MetadataFile FileName="TrendingService1.xsd" MetadataType="Schema" ID="cff225ab-6b7a-4059-8e18-75b8a2fef67b" SourceId="1" SourceUrl="http://localhost:64310/TrendingService.svc?xsd=xsd2" />
+    <MetadataFile FileName="TrendingService.wsdl" MetadataType="Wsdl" ID="ea12f01f-e603-45fc-9b6c-e490bd6cff25" SourceId="1" SourceUrl="http://localhost:64310/TrendingService.svc?wsdl" />
+    <MetadataFile FileName="TrendingService2.xsd" MetadataType="Schema" ID="25335292-bedf-494c-a5e6-6db88d205468" SourceId="1" SourceUrl="http://localhost:64310/TrendingService.svc?xsd=xsd0" />
+    <MetadataFile FileName="TrendingService.disco" MetadataType="Disco" ID="380243e2-8f39-4794-80b4-e8594cd0d2f8" SourceId="1" SourceUrl="http://localhost:64310/TrendingService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

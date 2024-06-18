@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScadaCoreTests", "ScadaCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverApi", "DriverApi\DriverApi.csproj", "{3127EF2C-D932-4317-88C0-F775F8471C1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnit\RTUnit.csproj", "{47E34AE4-9A50-4323-8434-5C9F411FBECA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{47E34AE4-9A50-4323-8434-5C9F411FBECA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{47E34AE4-9A50-4323-8434-5C9F411FBECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{47E34AE4-9A50-4323-8434-5C9F411FBECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{47E34AE4-9A50-4323-8434-5C9F411FBECA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

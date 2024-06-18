@@ -3,15 +3,20 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Threading;
 using System.Web;
 
 namespace ScadaCore.Tags.Model
 {
+    [DataContract]
     public class InputTag : Tag
     {
+        [DataMember]
         public int ScanTime { get; set; } // In milliseconds
+        [DataMember]
         public bool IsScanOn { get; set;  }
+        [DataMember]
         public IDriver Driver { get; }
 
         public InputTag()

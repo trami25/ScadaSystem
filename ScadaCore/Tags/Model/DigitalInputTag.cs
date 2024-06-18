@@ -2,10 +2,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Web;
 
 namespace ScadaCore.Tags.Model
 {
+    [DataContract]
     public class DigitalInputTag : InputTag
     {
         public DigitalInputTag()

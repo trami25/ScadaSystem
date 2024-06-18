@@ -1,7 +1,7 @@
 {
   "ExtendedData": {
     "inputs": [
-      "http://localhost:64310/AlarmService.svc"
+      "http://localhost:64310/DatabaseManagementService/TagService.svc"
     ],
     "collectionTypes": [
       "System.Array",

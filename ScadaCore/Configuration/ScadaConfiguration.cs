@@ -53,18 +53,27 @@ namespace ScadaCore.Configuration
                             ));
                         break;
                     case "ai":
-                        tagList.Add(new AnalogInputTag(
-                                tag.Attribute("id").Value,
-                                tag.Attribute("description").Value,
-                                tag.Attribute("ioAddress").Value,
-                                Convert.ToDouble(tag.Value),
-                                Convert.ToInt32(tag.Attribute("scanTime").Value),
-                                Convert.ToBoolean(tag.Attribute("isScanOn").Value),
-                                Convert.ToDouble(tag.Attribute("lowLimit").Value),
-                                Convert.ToDouble(tag.Attribute("highLimit").Value),
-                                (Unit)Enum.Parse(typeof(Unit), tag.Attribute("unit").Value),
-                                tag.Attribute("driver").Value == "simulation" ? _simulationDriver : _rtuDriver
-                            ));
+
+                        AnalogInputTag analogInputTag = new AnalogInputTag(
+                            tag.Attribute("id").Value,
+                            tag.Attribute("description").Value,
+                            tag.Attribute("ioAddress").Value,
+                            Convert.ToDouble(tag.Nodes().OfType<XText>().First().ToString()),
+                            Convert.ToInt32(tag.Attribute("scanTime").Value),
+                            Convert.ToBoolean(tag.Attribute("isScanOn").Value),
+                            Convert.ToDouble(tag.Attribute("lowLimit").Value),
+                            Convert.ToDouble(tag.Attribute("highLimit").Value),
+                            (Unit)Enum.Parse(typeof(Unit), tag.Attribute("unit").Value),
+                            tag.Attribute("driver").Value == "simulation" ? _simulationDriver : _rtuDriver,
+                            null
+                        );
+
+                        var alarms = tag.Descendants("alarm")
+                            .Select(a => new Alarm { TagName = analogInputTag.Id, Priority = Convert.ToInt32(a.Attribute("priority").Value), Threshold = Convert.ToDouble(a.Attribute("threshold").Value), Type = a.Attribute("type").Value, Unit = analogInputTag.Unit });
+
+                        analogInputTag.Alarms = alarms.ToList();
+
+                        tagList.Add(analogInputTag);
                         break;
                     case "ao":
                         tagList.Add(new AnalogOutputTag(

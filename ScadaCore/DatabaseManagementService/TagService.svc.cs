@@ -30,7 +30,7 @@ namespace ScadaCore.DatabaseManagementService
 
         public string AddAITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit)
         {
-            AnalogInputTag aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver());
+            AnalogInputTag aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver(), new List<Alarm>());
             tags.Add(aiTag);
             string message = $"Analog Input Tag added: {tagId}";
             return message;

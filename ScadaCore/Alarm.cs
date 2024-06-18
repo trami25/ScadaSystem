@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ScadaCore.Tags.Model;
+using System;
 using System.Runtime.Serialization;
 
 namespace ScadaCore
@@ -20,6 +21,12 @@ namespace ScadaCore
 
         [DataMember]
         public DateTime ActivationTime { get; set; }
+
+        public Unit Unit { get; set; }
+
+        public Alarm()
+        {
+        }
 
         public Alarm(string tagName, string type, int priority, double threshold)
         {

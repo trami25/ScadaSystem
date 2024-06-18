@@ -18,8 +18,7 @@ namespace ScadaCore.DatabaseManagementService
         private static List<Tag> tags = new List<Tag>();
         private static List<Alarm> alarms = new List<Alarm>();
         private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
-        private static readonly Dictionary<string, bool> loggedAlarms = new Dictionary<string, bool>();
-
+     
         private NamedPipeServerStream pipeServer;
 
         public TagService()
@@ -147,7 +146,7 @@ namespace ScadaCore.DatabaseManagementService
             if (alarmToRemove != null)
             {
                 alarms.Remove(alarmToRemove);
-                loggedAlarms.Remove(tagName); // Remove from logged alarms
+           
                 return $"Alarm removed for tag: {tagName}";
             }
             else
@@ -177,21 +176,16 @@ namespace ScadaCore.DatabaseManagementService
 
                             if (isAlarmConditionMet)
                             {
-                                if (!loggedAlarms.ContainsKey(tag.Id) || !loggedAlarms[tag.Id])
-                                {
                                     LogAlarm(alarm);
-                                    loggedAlarms[tag.Id] = true;
+                                    
                                     Console.WriteLine($"Alarm triggered for tag {tag.Id}: Type={alarm.Type}, Threshold={alarm.Threshold}");
-                                }
-                            }
-                            else
-                            {
-                                loggedAlarms[tag.Id] = false; // Reset the alarm state
+                                
                             }
                         }
                     }
+                    await Task.Delay(tag.ScanTime);
                 }
-                await Task.Delay(1000);
+               
             }
         }
 

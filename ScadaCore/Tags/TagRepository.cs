@@ -9,43 +9,48 @@ namespace ScadaCore.Tags
 {
     public class TagRepository
     {
-        public List<Tag> Tags { get; }
+        private readonly List<Tag> _tags;
 
         public TagRepository(ScadaConfiguration config)
         {
-            Tags = config.GetTags().ToList();
+            _tags = config.GetTags().ToList();
         }
 
         public ICollection<Tag> GetAll()
         {
-            return Tags;
+            return _tags;
         }
 
         public Tag GetById(string id)
         {
-            return Tags.FirstOrDefault(t => t.Id == id);
+            return _tags.FirstOrDefault(t => t.Id == id);
+        }
+
+        public ICollection<InputTag> GetInputTags()
+        {
+            return _tags.OfType<InputTag>().ToList();
         }
 
         public void Create(Tag tag)
         {
-            var oldTag = Tags.FirstOrDefault(t => t.Id == tag.Id);
+            var oldTag = _tags.FirstOrDefault(t => t.Id == tag.Id);
 
             if (oldTag != null)
             {
                 throw new ArgumentException("Tag exists");
             }
 
-            Tags.Add(tag);
+            _tags.Add(tag);
         }
 
         public void Delete(string id)
         {
-            Tags.RemoveAll(t => t.Id == id);
+            _tags.RemoveAll(t => t.Id == id);
         }
 
         public void Update(string id, Tag tag)
         {
-            var oldTag = Tags.FirstOrDefault(t => t.Id == id);
+            var oldTag = _tags.FirstOrDefault(t => t.Id == id);
             if (oldTag != null)
             {
                 oldTag = tag;

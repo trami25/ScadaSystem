@@ -9,6 +9,10 @@ namespace ScadaCore.Tags.Model
     {
         public double InitialValue { get; }
 
+        public DigitalOutputTag()
+        {
+        }
+
         public DigitalOutputTag(string id, string description, string ioAddress, double value, double initialValue) : base(id, description, ioAddress, value)
         {
             InitialValue = initialValue;

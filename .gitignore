@@ -5,6 +5,7 @@
 
 #Custom
 **/scadaConfig.xml
+**/alarmsLog.txt
 
 # User-specific files
 *.rsuser

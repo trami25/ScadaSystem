@@ -6,6 +6,7 @@ using System.Web;
 
 namespace ScadaCore.Tags.Model
 {
+
     [DataContract]
     public abstract class Tag
     {

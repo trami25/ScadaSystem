@@ -26,7 +26,7 @@ namespace RTUnit
             Console.Write("Enter upper limit: ");
             double upperLimit = double.Parse(Console.ReadLine());
 
-            await client.AddAddressAsync(address, lowerLimit, upperLimit);
+            //await client.AddAddressAsync(address, lowerLimit, upperLimit);
 
             await Task.Run(async () =>
             {

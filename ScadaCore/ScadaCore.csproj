@@ -1,4 +1,4 @@
-<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+﻿<Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\packages\EntityFramework.6.5.0\build\build\net6.0\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.0\build\build\net6.0\EntityFramework.props')" />
   <Import Project="..\packages\EntityFramework.6.5.0\build\build\EntityFramework.props" Condition="Exists('..\packages\EntityFramework.6.5.0\build\build\EntityFramework.props')" />
   <Import Project="..\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props" Condition="Exists('..\packages\Microsoft.EntityFrameworkCore.Design.3.1.32\build\net461\Microsoft.EntityFrameworkCore.Design.props')" />
@@ -267,11 +267,13 @@
     <Compile Include="Tags\Model\DigitalOutputTag.cs" />
     <Compile Include="Tags\Model\InputTag.cs" />
     <Compile Include="Tags\Model\Tag.cs" />
+    <Compile Include="Tags\Model\TagValue.cs" />
     <Compile Include="Tags\Model\Unit.cs" />
     <Compile Include="Tags\TagContext.cs" />
     <Compile Include="Tags\TagProcessor.cs" />
     <Compile Include="Tags\TagRepository.cs" />
     <Compile Include="Security.cs" />
+    <Compile Include="Tags\TagValueContext.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UsersContext.cs" />
     <Compile Include="Tags\TagService.cs" />

@@ -174,9 +174,6 @@ namespace ServiceReference1
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRTDriverService/AddAddress", ReplyAction="http://tempuri.org/IRTDriverService/AddAddressResponse")]
         System.Threading.Tasks.Task AddAddressAsync(string address, double lowerLimit, double upperLimit);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRTDriverService/ReturnValue", ReplyAction="http://tempuri.org/IRTDriverService/ReturnValueResponse")]
-        System.Threading.Tasks.Task<double> ReturnValueAsync(string address);
-        
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IRTDriverService/GetDataForAddress", ReplyAction="http://tempuri.org/IRTDriverService/GetDataForAddressResponse")]
         System.Threading.Tasks.Task<double[]> GetDataForAddressAsync(string address);
     }
@@ -234,11 +231,6 @@ namespace ServiceReference1
         public System.Threading.Tasks.Task AddAddressAsync(string address, double lowerLimit, double upperLimit)
         {
             return base.Channel.AddAddressAsync(address, lowerLimit, upperLimit);
-        }
-        
-        public System.Threading.Tasks.Task<double> ReturnValueAsync(string address)
-        {
-            return base.Channel.ReturnValueAsync(address);
         }
         
         public System.Threading.Tasks.Task<double[]> GetDataForAddressAsync(string address)

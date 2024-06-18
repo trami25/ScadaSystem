@@ -32,8 +32,8 @@ namespace RTUnit
             {
                 while (true)
                 {
-                    double value = await client.ReturnValueAsync(address);
-                    Console.WriteLine($"Generated value for {address}: {value}");
+                    //double value = await client.ReturnValueAsync(address);
+                    //Console.WriteLine($"Generated value for {address}: {value}");
                     Thread.Sleep(10000);
                 }
             });

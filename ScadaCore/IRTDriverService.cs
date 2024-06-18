@@ -14,8 +14,8 @@ namespace ScadaCore
         [OperationContract]
         void AddAddress(string address, double lowerLimit, double upperLimit);
 
-        [OperationContract]
-        double ReturnValue(string address);
+        //[OperationContract]
+        //double ReturnValue(string address);
 
         [OperationContract]
         List<double> GetDataForAddress(string address);

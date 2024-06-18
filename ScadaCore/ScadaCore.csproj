@@ -231,7 +231,6 @@
       <DependentUpon>20240614152019_InitialCreate.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\UsersContextModelSnapshot.cs" />
-    <Compile Include="PBKDF2.cs" />
     <Compile Include="Authentication.svc.cs">
       <DependentUpon>Authentication.svc</DependentUpon>
     </Compile>

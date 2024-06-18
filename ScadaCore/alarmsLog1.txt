@@ -1,0 +1,1 @@
+Alarm: 1, Type: High, Priority: 1, Threshold: 13, Activated At: 18.6.2024. 11:47:10

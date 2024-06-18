@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace ServiceReference4
+namespace ServiceReference2
 {
     using System.Runtime.Serialization;
     
@@ -15,8 +15,8 @@ namespace ServiceReference4
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.InputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.AnalogInputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.InputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
     public partial class Tag : object
     {
         
@@ -84,12 +84,12 @@ namespace ServiceReference4
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.AnalogInputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.Tag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.Tag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.AnalogInputTag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference4.Unit))]
-    public partial class InputTag : ServiceReference4.Tag
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Unit))]
+    public partial class InputTag : ServiceReference2.Tag
     {
         
         private object DriverField;
@@ -141,14 +141,14 @@ namespace ServiceReference4
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="AnalogInputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    public partial class AnalogInputTag : ServiceReference4.InputTag
+    public partial class AnalogInputTag : ServiceReference2.InputTag
     {
         
         private double HighLimitField;
         
         private double LowLimitField;
         
-        private ServiceReference4.Unit UnitField;
+        private ServiceReference2.Unit UnitField;
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public double HighLimit
@@ -177,7 +177,7 @@ namespace ServiceReference4
         }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference4.Unit Unit
+        public ServiceReference2.Unit Unit
         {
             get
             {
@@ -209,40 +209,55 @@ namespace ServiceReference4
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference4.ITagService")]
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.ITagService")]
     public interface ITagService
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddTag", ReplyAction="http://tempuri.org/ITagService/AddTagResponse")]
-        System.Threading.Tasks.Task AddTagAsync(ScadaCore.Tags.Model.Tag tag);
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAITag", ReplyAction="http://tempuri.org/ITagService/AddAITagResponse")]
+        System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAOTag", ReplyAction="http://tempuri.org/ITagService/AddAOTagResponse")]
+        System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDITag", ReplyAction="http://tempuri.org/ITagService/AddDITagResponse")]
+        System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDOTag", ReplyAction="http://tempuri.org/ITagService/AddDOTagResponse")]
+        System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveTag", ReplyAction="http://tempuri.org/ITagService/RemoveTagResponse")]
-        System.Threading.Tasks.Task RemoveTagAsync(string tagId);
+        System.Threading.Tasks.Task<string> RemoveTagAsync(string tagId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/EnableScan", ReplyAction="http://tempuri.org/ITagService/EnableScanResponse")]
-        System.Threading.Tasks.Task EnableScanAsync(string tagId);
+        System.Threading.Tasks.Task<string> EnableScanAsync(string tagId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/DisableScan", ReplyAction="http://tempuri.org/ITagService/DisableScanResponse")]
-        System.Threading.Tasks.Task DisableScanAsync(string tagId);
+        System.Threading.Tasks.Task<string> DisableScanAsync(string tagId);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/SetOutputValue", ReplyAction="http://tempuri.org/ITagService/SetOutputValueResponse")]
-        System.Threading.Tasks.Task SetOutputValueAsync(string tagId, double value);
+        System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllTags", ReplyAction="http://tempuri.org/ITagService/GetAllTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference4.Tag[]> GetAllTagsAsync();
+        System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAnalogInputTags", ReplyAction="http://tempuri.org/ITagService/GetAnalogInputTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference4.AnalogInputTag[]> GetAnalogInputTagsAsync();
+        System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAlarm", ReplyAction="http://tempuri.org/ITagService/AddAlarmResponse")]
+        System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveAlarm", ReplyAction="http://tempuri.org/ITagService/RemoveAlarmResponse")]
+        System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName);
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface ITagServiceChannel : ServiceReference4.ITagService, System.ServiceModel.IClientChannel
+    public interface ITagServiceChannel : ServiceReference2.ITagService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class TagServiceClient : System.ServiceModel.ClientBase<ServiceReference4.ITagService>, ServiceReference4.ITagService
+    public partial class TagServiceClient : System.ServiceModel.ClientBase<ServiceReference2.ITagService>, ServiceReference2.ITagService
     {
         
         /// <summary>
@@ -285,39 +300,64 @@ namespace ServiceReference4
         {
         }
         
-        public System.Threading.Tasks.Task AddTagAsync(ScadaCore.Tags.Model.Tag tag)
+        public System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit)
         {
-            return base.Channel.AddTagAsync(tag);
+            return base.Channel.AddAITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, unit);
         }
         
-        public System.Threading.Tasks.Task RemoveTagAsync(string tagId)
+        public System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit)
+        {
+            return base.Channel.AddAOTagAsync(tagId, description, ioAddress, value, initialValue, lowLimit, highLimit, unit);
+        }
+        
+        public System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn)
+        {
+            return base.Channel.AddDITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn);
+        }
+        
+        public System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue)
+        {
+            return base.Channel.AddDOTagAsync(tagId, description, ioAddress, value, initialValue);
+        }
+        
+        public System.Threading.Tasks.Task<string> RemoveTagAsync(string tagId)
         {
             return base.Channel.RemoveTagAsync(tagId);
         }
         
-        public System.Threading.Tasks.Task EnableScanAsync(string tagId)
+        public System.Threading.Tasks.Task<string> EnableScanAsync(string tagId)
         {
             return base.Channel.EnableScanAsync(tagId);
         }
         
-        public System.Threading.Tasks.Task DisableScanAsync(string tagId)
+        public System.Threading.Tasks.Task<string> DisableScanAsync(string tagId)
         {
             return base.Channel.DisableScanAsync(tagId);
         }
         
-        public System.Threading.Tasks.Task SetOutputValueAsync(string tagId, double value)
+        public System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value)
         {
             return base.Channel.SetOutputValueAsync(tagId, value);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference4.Tag[]> GetAllTagsAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync()
         {
             return base.Channel.GetAllTagsAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference4.AnalogInputTag[]> GetAnalogInputTagsAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync()
         {
             return base.Channel.GetAnalogInputTagsAsync();
+        }
+        
+        public System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold)
+        {
+            return base.Channel.AddAlarmAsync(tagName, type, priority, threshold);
+        }
+        
+        public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName)
+        {
+            return base.Channel.RemoveAlarmAsync(tagName);
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -343,7 +383,7 @@ namespace ServiceReference4
         {
             if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_ITagService))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:64310/DatabaseManagementService/TagService.svc/Alarm");
+                return new System.ServiceModel.EndpointAddress("http://localhost:64310/DatabaseManagementService/TagService.svc/Tag");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }

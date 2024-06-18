@@ -69,7 +69,7 @@ namespace ScadaCore.Configuration
                         );
 
                         var alarms = tag.Descendants("alarm")
-                            .Select(a => new Alarm { TagName = analogInputTag.Id, Priority = Convert.ToInt32(a.Attribute("priority").Value), Threshold = Convert.ToDouble(a.Attribute("threshold").Value), Type = a.Attribute("type").Value, Unit = analogInputTag.Unit });
+                            .Select(a => new Alarm { TagName = a.Attribute("id").Value, Priority = Convert.ToInt32(a.Attribute("priority").Value), Threshold = Convert.ToDouble(a.Attribute("threshold").Value), Type = a.Attribute("type").Value, Unit = analogInputTag.Unit });
 
                         analogInputTag.Alarms = alarms.ToList();
 

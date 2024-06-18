@@ -14,7 +14,7 @@ namespace ScadaCoreTests
         private static ScadaConfiguration _scadaConfiguration;
         private static List<Tag> _tags;
         private static MainSimulationDriver _simulationDriver;
-
+         
         [ClassInitialize]
         public static void Setup(TestContext context)
         {

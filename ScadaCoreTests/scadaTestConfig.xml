@@ -5,7 +5,7 @@
 	<ai id="ai1" description="Analog input tag." ioAddress="S" scanTime="1000" isScanOn="true" lowLimit="-5.5" highLimit="99.3" unit="Ms" driver="simulation">
 		25.4
 		<alarms>
-			<alarm type="high" priority="1" threshold="5.0" />
+			<alarm id="alarm1" type="high" priority="1" threshold="5.0" />
 		</alarms>
 	</ai>
 	<ao id="ao1" description="Analog output tag." ioAddress="R" initialValue="15.4" lowLimit="5.0" highLimit="150.0" unit="Kg" driver="simulation">111.11</ao>

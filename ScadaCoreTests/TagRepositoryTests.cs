@@ -1,9 +1,11 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using ScadaCore;
 using ScadaCore.Configuration;
 using ScadaCore.Tags;
 using ScadaCore.Tags.Model;
 using SimulationDriver;
 using System;
+using System.Linq;
 
 namespace ScadaCoreTests
 {
@@ -85,6 +87,28 @@ namespace ScadaCoreTests
             Assert.IsNotNull(updatedTag);
             Assert.AreEqual(tag.Id, updatedTag.Id);
             Assert.AreEqual(50.0, updatedTag.Value);
+        }
+
+        [TestMethod]
+        public void ShouldAddAlarm()
+        {
+            _tagRepository.AddAlarmToAnalogInputTag("ai1", new Alarm { TagName = "test" });
+
+            AnalogInputTag tag = (AnalogInputTag)_tagRepository.GetById("ai1");
+
+            Assert.IsNotNull(tag);
+            Assert.AreEqual(2, tag.Alarms.Count);
+        }
+
+        [TestMethod]
+        public void ShouldRemoveAlarm()
+        {
+            _tagRepository.RemoveAlarmFromAnalogInputTag("ai1", "alarm1");
+
+            AnalogInputTag tag = (AnalogInputTag)_tagRepository.GetById("ai1");
+
+            Assert.IsNotNull(tag);
+            Assert.AreEqual(0, tag.Alarms.Count);
         }
     }
 }

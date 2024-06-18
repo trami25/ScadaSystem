@@ -17,6 +17,10 @@ namespace ScadaCore.Tags.Model
         [DataMember]
         public Unit Unit { get; }
 
+        public AnalogInputTag()
+        {
+        }
+
         public AnalogInputTag(string id, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, Unit unit, IDriver driver) : base(id, description, ioAddress, value, scanTime, isScanOn, driver)
         {
             LowLimit = lowLimit;

@@ -18,6 +18,10 @@ namespace ScadaCore.Tags.Model
         [DataMember]
         public Unit Unit { get; }
 
+        public AnalogOutputTag()
+        {
+        }
+
         public AnalogOutputTag(string id, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, Unit unit) : base(id, description, ioAddress, value)
         {
             InitialValue = initialValue;

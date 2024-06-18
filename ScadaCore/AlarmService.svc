@@ -1,1 +1,1 @@
-﻿<%@ ServiceHost Language="C#" Debug="true" Service="ScadaCore.AlarmService" CodeBehind="AlarmService.svc.cs" %>
+<%@ ServiceHost Language="C#" Debug="true" Service="ScadaCore.AlarmService" CodeBehind="AlarmService.svc.cs" %>

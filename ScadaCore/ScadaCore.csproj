@@ -234,6 +234,7 @@
     <Content Include="AlarmService.svc" />
     <Content Include="Authentication.svc" />
     <Content Include="DatabaseManagementService\TagService.svc" />
+    <Content Include="TrendingService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -258,6 +259,7 @@
     <Compile Include="Configuration\ScadaConfiguration.cs" />
     <Compile Include="IAuthentication.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ITrendingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Tags\Model\AnalogInputTag.cs" />
     <Compile Include="Tags\Model\AnalogOutputTag.cs" />
@@ -266,11 +268,17 @@
     <Compile Include="Tags\Model\InputTag.cs" />
     <Compile Include="Tags\Model\Tag.cs" />
     <Compile Include="Tags\Model\Unit.cs" />
+    <Compile Include="Tags\TagContext.cs" />
     <Compile Include="Tags\TagProcessor.cs" />
     <Compile Include="Tags\TagRepository.cs" />
     <Compile Include="Security.cs" />
     <Compile Include="User.cs" />
     <Compile Include="UsersContext.cs" />
+    <Compile Include="Tags\TagService.cs" />
+    <Compile Include="TrendingService.svc.cs">
+      <DependentUpon>TrendingService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="WcfServiceFactory.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

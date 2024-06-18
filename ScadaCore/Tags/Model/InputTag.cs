@@ -1,6 +1,7 @@
 ﻿using DriverApi;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
 using System.Linq;
 using System.Runtime.Serialization;
 using System.Threading;
@@ -18,6 +19,10 @@ namespace ScadaCore.Tags.Model
         [DataMember]
         public IDriver Driver { get; }
 
+        public InputTag()
+        {
+        }
+
         public InputTag(string id, string description, string ioAddress, double value, int scanTime, bool isScanOn, IDriver driver) : base(id, description, ioAddress, value)
         {
             ScanTime = scanTime;
@@ -30,6 +35,12 @@ namespace ScadaCore.Tags.Model
             while (IsScanOn)
             {
                 Value = Driver.ReturnValue(IOAddress);
+
+                using (TagContext context = new TagContext())
+                {
+                    context.Tags.AddOrUpdate((Tag)this);
+                }
+
                 Thread.Sleep(ScanTime);
             }
         }

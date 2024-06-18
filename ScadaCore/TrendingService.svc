@@ -1,0 +1,5 @@
+<<<<<<<< HEAD:ScadaCore/AlarmService.svc
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ScadaCore.AlarmService" CodeBehind="AlarmService.svc.cs" %>
+========
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="ScadaCore.TrendingService" Factory="ScadaCore.WcfServiceFactory" %>
+>>>>>>>> 42a06b7287c24a7bc69ec273fe15ff7d4f9657c8:ScadaCore/TrendingService.svc

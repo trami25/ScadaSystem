@@ -11,6 +11,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScadaCoreTests", "ScadaCore
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DriverApi", "DriverApi\DriverApi.csproj", "{3127EF2C-D932-4317-88C0-F775F8471C1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TrendingApp", "TrendingApp\TrendingApp.csproj", "{30B50E2C-845C-40B7-8292-8AB9D22FCC32}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B8DAC8C-922B-489C-891A-1646C765F794} = {1B8DAC8C-922B-489C-891A-1646C765F794}
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +38,10 @@ Global
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3127EF2C-D932-4317-88C0-F775F8471C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30B50E2C-845C-40B7-8292-8AB9D22FCC32}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30B50E2C-845C-40B7-8292-8AB9D22FCC32}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30B50E2C-845C-40B7-8292-8AB9D22FCC32}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30B50E2C-845C-40B7-8292-8AB9D22FCC32}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

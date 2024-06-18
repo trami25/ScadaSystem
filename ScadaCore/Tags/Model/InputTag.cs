@@ -36,10 +36,11 @@ namespace ScadaCore.Tags.Model
             {
                 Value = Driver.ReturnValue(IOAddress);
 
-                using (TagContext context = new TagContext())
-                {
-                    context.Tags.AddOrUpdate((Tag)this);
-                }
+                // TODO: Add only tag values to db
+                //using (TagContext context = new TagContext())
+                //{
+                //    context.Tags.AddOrUpdate((Tag)this);
+                //}
 
                 Thread.Sleep(ScanTime);
             }

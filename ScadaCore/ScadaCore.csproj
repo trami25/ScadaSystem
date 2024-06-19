@@ -234,6 +234,7 @@
     <Content Include="AlarmService.svc" />
     <Content Include="Authentication.svc" />
     <Content Include="DatabaseManagementService\TagService.svc" />
+    <Content Include="ReportService.svc" />
     <Content Include="TrendingService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -247,6 +248,7 @@
       <DependentUpon>TagService.svc</DependentUpon>
     </Compile>
     <Compile Include="IAlarmService.cs" />
+    <Compile Include="IReportService.cs" />
     <Compile Include="ISimpleService.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.Designer.cs">
@@ -261,6 +263,9 @@
     <Compile Include="Program.cs" />
     <Compile Include="ITrendingService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReportService.svc.cs">
+      <DependentUpon>ReportService.svc</DependentUpon>
+    </Compile>
     <Compile Include="Tags\Model\AnalogInputTag.cs" />
     <Compile Include="Tags\Model\AnalogOutputTag.cs" />
     <Compile Include="Tags\Model\DigitalInputTag.cs" />

@@ -1,9 +1,9 @@
-﻿using ScadaCore;
-using ScadaCore.Tags.Model;
+﻿using ReportManager.ServiceReference1;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
+using System.ServiceModel;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,11 +11,14 @@ namespace ReportManager
 {
     public class Program
     {
+        static ServiceReference1.ReportServiceClient reportServiceClient;
+        
+
+
         static void Main(string[] args)
         {
 
-            AlarmReports alarmReports = new AlarmReports();
-            TagReports tagReports = new TagReports();
+            reportServiceClient = new ServiceReference1.ReportServiceClient();
 
 
             string option;
@@ -39,7 +42,7 @@ namespace ReportManager
                 {
                     case "1":
                         Console.WriteLine("All alarms: ");
-                        List<Alarm> alarms = alarmReports.GetAllAlarms();
+                        List<Alarm> alarms = reportServiceClient.GetAllAlarms().ToList();
 
                         foreach (Alarm alarm in alarms)
                         {
@@ -78,7 +81,7 @@ namespace ReportManager
 
                         Console.WriteLine();
                         Console.WriteLine($"Alarms in time period from {startTime} to {endTime} (sorted by priority, than by time): ");
-                        List<Alarm> alarmsInTimePeriod = alarmReports.GetAlarmsInTimePeriod(startTime, endTime);
+                        List<Alarm> alarmsInTimePeriod = reportServiceClient.GetAllAlarmsInTimePeriod(startTime, endTime).ToList();
 
                         foreach (Alarm alarm in alarmsInTimePeriod)
                         {
@@ -101,7 +104,7 @@ namespace ReportManager
 
                         Console.WriteLine($"Entered priority: {targetPriority}");
 
-                        List<Alarm> alarmsWithTargetPriority = alarmReports.GetAlarmsWithPriority(targetPriority);
+                        List<Alarm> alarmsWithTargetPriority = reportServiceClient.GetAlarmsWithPriority(targetPriority).ToList();
 
                         Console.WriteLine($"Alarms with priority {targetPriority} (sorted by timestamp): ");
 
@@ -112,7 +115,7 @@ namespace ReportManager
                         break;
 
                     case "4":
-                        List<TagValue> tagValues = tagReports.GetAllTagValues();
+                        List<TagValue> tagValues = reportServiceClient.GetAllTagValues().ToList();
                         Console.WriteLine("All tag values: ");
 
                         foreach(TagValue tagValue in tagValues)
@@ -148,7 +151,7 @@ namespace ReportManager
                         }
                         Console.WriteLine($"Entered end tag time: {endTagTime}");
 
-                        List<TagValue> tagValuesInTimePeriod = tagReports.GetAllTagValuesInTimePeriod(startTagTime, endTagTime);
+                        List<TagValue> tagValuesInTimePeriod = reportServiceClient.GetAllTagValuesInTimePeriod(startTagTime, endTagTime).ToList();
 
                         Console.WriteLine($"Tag values in time period from {startTagTime} to {endTagTime} (sorted by timestamp): ");
                         foreach(TagValue tagValue in tagValuesInTimePeriod)
@@ -159,7 +162,7 @@ namespace ReportManager
                         break;
 
                     case "6":
-                        List<TagValue> latestAITagsValues = tagReports.GetLatestAITagValues();
+                        List<TagValue> latestAITagsValues = reportServiceClient.GetLatestAITagsValues().ToList();
                         Console.WriteLine("Latest AI tags values: ");
 
                         foreach (TagValue tagValue in latestAITagsValues)
@@ -169,7 +172,7 @@ namespace ReportManager
                         break;
 
                     case "7":
-                        List<TagValue> latestDITagsValues = tagReports.GetLatestDITagsValues();
+                        List<TagValue> latestDITagsValues = reportServiceClient.GetLatestDITagsValues().ToList();
                         Console.WriteLine("Latest DI tags values: ");
 
                         foreach(TagValue tagValue in latestDITagsValues)
@@ -179,13 +182,13 @@ namespace ReportManager
                         break;
 
                     case "8":
-                        TagValue latestAITagValue = tagReports.GetLatestValueAmongAllAITags();
+                        TagValue latestAITagValue = reportServiceClient.GetLatestValueAmongAllAITags();
                         Console.WriteLine("Latest tag value among all AI tags: ");
                         Console.WriteLine($"Id: {latestAITagValue.Id}, Tag name: {latestAITagValue.TagId}, Value: {latestAITagValue.Value}, Timestamp: {latestAITagValue.Timestamp}");
                         break;
 
                     case "9":
-                        TagValue latestDITagValue = tagReports.GetLatestValueAmongAllDITags();
+                        TagValue latestDITagValue = reportServiceClient.GetLatestValueAmongAllDITags();
                         Console.WriteLine("Latest tag value among all DI tags: ");
                         Console.WriteLine($"Id: {latestDITagValue.Id}, Tag name: {latestDITagValue.TagId}, Value: {latestDITagValue.Value}, Timestamp: {latestDITagValue.Timestamp}");
                         break;
@@ -194,7 +197,7 @@ namespace ReportManager
                         Console.WriteLine("Enter Tag ID: ");
                         string tagIdInput = Console.ReadLine();
 
-                        List<TagValue> tagValuesForTagId = tagReports.GetAllValuesForTag(tagIdInput);
+                        List<TagValue> tagValuesForTagId = reportServiceClient.GetAllValuesForTag(tagIdInput).ToList();
                         Console.WriteLine($"All tag values for tag with id {tagIdInput} (sorted by value): ");
                         foreach (TagValue tagValue in tagValuesForTagId)
                         {

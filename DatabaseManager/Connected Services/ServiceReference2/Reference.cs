@@ -9,204 +9,7 @@
 
 namespace ServiceReference2
 {
-    using System.Runtime.Serialization;
     
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.InputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
-    public partial class Tag : object
-    {
-        
-        private string DescriptionField;
-        
-        private string IOAddressField;
-        
-        private string IdField;
-        
-        private double ValueField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description
-        {
-            get
-            {
-                return this.DescriptionField;
-            }
-            set
-            {
-                this.DescriptionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string IOAddress
-        {
-            get
-            {
-                return this.IOAddressField;
-            }
-            set
-            {
-                this.IOAddressField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Id
-        {
-            get
-            {
-                return this.IdField;
-            }
-            set
-            {
-                this.IdField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double Value
-        {
-            get
-            {
-                return this.ValueField;
-            }
-            set
-            {
-                this.ValueField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Unit))]
-    public partial class InputTag : ServiceReference2.Tag
-    {
-        
-        private object DriverField;
-        
-        private bool IsScanOnField;
-        
-        private int ScanTimeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public object Driver
-        {
-            get
-            {
-                return this.DriverField;
-            }
-            set
-            {
-                this.DriverField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsScanOn
-        {
-            get
-            {
-                return this.IsScanOnField;
-            }
-            set
-            {
-                this.IsScanOnField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ScanTime
-        {
-            get
-            {
-                return this.ScanTimeField;
-            }
-            set
-            {
-                this.ScanTimeField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AnalogInputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    public partial class AnalogInputTag : ServiceReference2.InputTag
-    {
-        
-        private double HighLimitField;
-        
-        private double LowLimitField;
-        
-        private ServiceReference2.Unit UnitField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double HighLimit
-        {
-            get
-            {
-                return this.HighLimitField;
-            }
-            set
-            {
-                this.HighLimitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double LowLimit
-        {
-            get
-            {
-                return this.LowLimitField;
-            }
-            set
-            {
-                this.LowLimitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference2.Unit Unit
-        {
-            get
-            {
-                return this.UnitField;
-            }
-            set
-            {
-                this.UnitField = value;
-            }
-        }
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Unit", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    public enum Unit : int
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Kg = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ms = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        C = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        F = 3,
-    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.ITagService")]
@@ -238,10 +41,10 @@ namespace ServiceReference2
         System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllTags", ReplyAction="http://tempuri.org/ITagService/GetAllTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync();
+        System.Threading.Tasks.Task<ScadaCore.Tags.Model.Tag[]> GetAllTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAnalogInputTags", ReplyAction="http://tempuri.org/ITagService/GetAnalogInputTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync();
+        System.Threading.Tasks.Task<ScadaCore.Tags.Model.AnalogInputTag[]> GetAnalogInputTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAlarm", ReplyAction="http://tempuri.org/ITagService/AddAlarmResponse")]
         System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold);
@@ -340,12 +143,12 @@ namespace ServiceReference2
             return base.Channel.SetOutputValueAsync(tagId, value);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync()
+        public System.Threading.Tasks.Task<ScadaCore.Tags.Model.Tag[]> GetAllTagsAsync()
         {
             return base.Channel.GetAllTagsAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync()
+        public System.Threading.Tasks.Task<ScadaCore.Tags.Model.AnalogInputTag[]> GetAnalogInputTagsAsync()
         {
             return base.Channel.GetAnalogInputTagsAsync();
         }

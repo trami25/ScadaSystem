@@ -6,6 +6,9 @@
 #Custom
 **/scadaConfig.xml
 **/alarmsLog.txt
+**/*_InitialCreate.cs
+**/*_InitialCreate.Designer.cs
+**/UsersContextModelSnapshot.cs
 
 # User-specific files
 *.rsuser

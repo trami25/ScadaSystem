@@ -10,6 +10,7 @@ using System.ServiceModel;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ScadaCore.DatabaseManagementService
 {
@@ -17,6 +18,7 @@ namespace ScadaCore.DatabaseManagementService
     {
         private static List<Tag> tags = new List<Tag>();
         private static List<Alarm> alarms = new List<Alarm>();
+        private static List<Alarm> invokedAlarms = new List<Alarm>();
         private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
      
         private NamedPipeServerStream pipeServer;
@@ -24,10 +26,15 @@ namespace ScadaCore.DatabaseManagementService
         public TagService()
         {
             Task.Run(() => MonitorTags());
-            Task.Run(() => StartNamedPipeServer());
             Console.WriteLine("TagService initialized and monitoring started.");
         }
 
+        public List<Alarm> GetAlarms()
+        {
+            var alarmsToReturn = new List<Alarm>(invokedAlarms);
+            invokedAlarms.Clear();
+            return alarmsToReturn;
+        }
         public string AddAITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit)
         {
             AnalogInputTag aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver());
@@ -85,13 +92,13 @@ namespace ScadaCore.DatabaseManagementService
             }
         }
 
-        public List<Tag> GetAllTags()
+        public ICollection<Tag> GetAllTags()
         {
             Console.WriteLine($"Retrieving all tags. Total tags: {tags.Count}");
             return tags;
         }
 
-        public List<AnalogInputTag> GetAnalogInputTags()
+        public ICollection<AnalogInputTag> GetAnalogInputTags()
         {
             var aiTags = tags.OfType<AnalogInputTag>().ToList();
             Console.WriteLine($"Retrieving all analog input tags. Total tags: {aiTags.Count}");
@@ -163,6 +170,7 @@ namespace ScadaCore.DatabaseManagementService
 
         private async Task MonitorTags()
         {
+            int scanTime = 0;
             while (true)
             {
                 foreach (var tag in tags.OfType<AnalogInputTag>())
@@ -177,15 +185,15 @@ namespace ScadaCore.DatabaseManagementService
                             if (isAlarmConditionMet)
                             {
                                     LogAlarm(alarm);
-                                    
+                                    invokedAlarms.Add(alarm);
                                     Console.WriteLine($"Alarm triggered for tag {tag.Id}: Type={alarm.Type}, Threshold={alarm.Threshold}");
                                 
                             }
                         }
                     }
-                    await Task.Delay(tag.ScanTime);
+                    scanTime = tag.ScanTime;
                 }
-               
+                await Task.Delay(scanTime);
             }
         }
 
@@ -206,7 +214,7 @@ namespace ScadaCore.DatabaseManagementService
                     sw.WriteLine(logEntry);
                 }
 
-                NotifyClient(logEntry);
+              
 
                 Console.WriteLine($"Alarm logged for tag {alarm.TagName}");
             }
@@ -220,42 +228,6 @@ namespace ScadaCore.DatabaseManagementService
                 Console.WriteLine($"Failed to log alarm. Exception: {ex.Message}");
                 throw new FaultException<ExceptionDetail>(new ExceptionDetail(ex), new FaultReason("An error occurred while logging the alarm."));
             }
-        }
-
-        private void NotifyClient(string message)
-        {
-            try
-            {
-                if (pipeServer != null && pipeServer.IsConnected)
-                {
-                    byte[] messageBytes = Encoding.UTF8.GetBytes(message);
-                    pipeServer.Write(messageBytes, 0, messageBytes.Length);
-                    pipeServer.Flush();
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Failed to notify client. Exception: {ex.Message}");
-            }
-        }
-
-        private void StartNamedPipeServer()
-        {
-            pipeServer = new NamedPipeServerStream("AlarmPipe", PipeDirection.Out, 1, PipeTransmissionMode.Byte, PipeOptions.Asynchronous);
-
-            Console.WriteLine("Waiting for client connection...");
-            pipeServer.BeginWaitForConnection((IAsyncResult result) =>
-            {
-                try
-                {
-                    pipeServer.EndWaitForConnection(result);
-                    Console.WriteLine("Client connected.");
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to connect client. Exception: {ex.Message}");
-                }
-            }, null);
         }
     }
 }

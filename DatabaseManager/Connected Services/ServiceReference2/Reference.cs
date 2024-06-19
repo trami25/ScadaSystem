@@ -85,6 +85,8 @@ namespace ServiceReference2
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Alarm[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Alarm))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag[]))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag))]
     [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag[]))]
@@ -190,6 +192,88 @@ namespace ServiceReference2
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Alarm", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore")]
+    public partial class Alarm : object
+    {
+        
+        private System.DateTime ActivationTimeField;
+        
+        private int PriorityField;
+        
+        private string TagNameField;
+        
+        private double ThresholdField;
+        
+        private string TypeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public System.DateTime ActivationTime
+        {
+            get
+            {
+                return this.ActivationTimeField;
+            }
+            set
+            {
+                this.ActivationTimeField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int Priority
+        {
+            get
+            {
+                return this.PriorityField;
+            }
+            set
+            {
+                this.PriorityField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string TagName
+        {
+            get
+            {
+                return this.TagNameField;
+            }
+            set
+            {
+                this.TagNameField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Threshold
+        {
+            get
+            {
+                return this.ThresholdField;
+            }
+            set
+            {
+                this.ThresholdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Type
+        {
+            get
+            {
+                return this.TypeField;
+            }
+            set
+            {
+                this.TypeField = value;
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Unit", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
     public enum Unit : int
@@ -248,6 +332,9 @@ namespace ServiceReference2
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveAlarm", ReplyAction="http://tempuri.org/ITagService/RemoveAlarmResponse")]
         System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAlarms", ReplyAction="http://tempuri.org/ITagService/GetAlarmsResponse")]
+        System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetAlarmsAsync();
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
@@ -358,6 +445,11 @@ namespace ServiceReference2
         public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName)
         {
             return base.Channel.RemoveAlarmAsync(tagName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetAlarmsAsync()
+        {
+            return base.Channel.GetAlarmsAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()

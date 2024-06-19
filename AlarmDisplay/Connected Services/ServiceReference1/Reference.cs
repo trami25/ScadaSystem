@@ -14,6 +14,186 @@ namespace ServiceReference1
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.InputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.AnalogInputTag))]
+    public partial class Tag : object
+    {
+        
+        private string DescriptionField;
+        
+        private string IOAddressField;
+        
+        private string IdField;
+        
+        private double ValueField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Description
+        {
+            get
+            {
+                return this.DescriptionField;
+            }
+            set
+            {
+                this.DescriptionField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string IOAddress
+        {
+            get
+            {
+                return this.IOAddressField;
+            }
+            set
+            {
+                this.IOAddressField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public string Id
+        {
+            get
+            {
+                return this.IdField;
+            }
+            set
+            {
+                this.IdField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double Value
+        {
+            get
+            {
+                return this.ValueField;
+            }
+            set
+            {
+                this.ValueField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.AnalogInputTag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.Alarm[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.Alarm))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.Tag[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.Tag))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.AnalogInputTag[]))]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference1.Unit))]
+    public partial class InputTag : ServiceReference1.Tag
+    {
+        
+        private object DriverField;
+        
+        private bool IsScanOnField;
+        
+        private int ScanTimeField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public object Driver
+        {
+            get
+            {
+                return this.DriverField;
+            }
+            set
+            {
+                this.DriverField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public bool IsScanOn
+        {
+            get
+            {
+                return this.IsScanOnField;
+            }
+            set
+            {
+                this.IsScanOnField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public int ScanTime
+        {
+            get
+            {
+                return this.ScanTimeField;
+            }
+            set
+            {
+                this.ScanTimeField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="AnalogInputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
+    public partial class AnalogInputTag : ServiceReference1.InputTag
+    {
+        
+        private double HighLimitField;
+        
+        private double LowLimitField;
+        
+        private ServiceReference1.Unit UnitField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double HighLimit
+        {
+            get
+            {
+                return this.HighLimitField;
+            }
+            set
+            {
+                this.HighLimitField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public double LowLimit
+        {
+            get
+            {
+                return this.LowLimitField;
+            }
+            set
+            {
+                this.LowLimitField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute()]
+        public ServiceReference1.Unit Unit
+        {
+            get
+            {
+                return this.UnitField;
+            }
+            set
+            {
+                this.UnitField = value;
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.Runtime.Serialization.DataContractAttribute(Name="Alarm", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore")]
     public partial class Alarm : object
     {
@@ -95,28 +275,76 @@ namespace ServiceReference1
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.IAlarmService")]
-    public interface IAlarmService
+    [System.Runtime.Serialization.DataContractAttribute(Name="Unit", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
+    public enum Unit : int
     {
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmService/AddAlarm", ReplyAction="http://tempuri.org/IAlarmService/AddAlarmResponse")]
-        System.Threading.Tasks.Task AddAlarmAsync(string tagName, string type, int priority, double threshold);
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Kg = 0,
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmService/RemoveAlarm", ReplyAction="http://tempuri.org/IAlarmService/RemoveAlarmResponse")]
-        System.Threading.Tasks.Task RemoveAlarmAsync(string tagName);
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        Ms = 1,
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/IAlarmService/GetActiveAlarms", ReplyAction="http://tempuri.org/IAlarmService/GetActiveAlarmsResponse")]
-        System.Threading.Tasks.Task<ServiceReference1.Alarm[]> GetActiveAlarmsAsync();
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        C = 2,
+        
+        [System.Runtime.Serialization.EnumMemberAttribute()]
+        F = 3,
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public interface IAlarmServiceChannel : ServiceReference1.IAlarmService, System.ServiceModel.IClientChannel
+    [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference1.ITagService")]
+    public interface ITagService
+    {
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAITag", ReplyAction="http://tempuri.org/ITagService/AddAITagResponse")]
+        System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAOTag", ReplyAction="http://tempuri.org/ITagService/AddAOTagResponse")]
+        System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDITag", ReplyAction="http://tempuri.org/ITagService/AddDITagResponse")]
+        System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDOTag", ReplyAction="http://tempuri.org/ITagService/AddDOTagResponse")]
+        System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveTag", ReplyAction="http://tempuri.org/ITagService/RemoveTagResponse")]
+        System.Threading.Tasks.Task<string> RemoveTagAsync(string tagId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/EnableScan", ReplyAction="http://tempuri.org/ITagService/EnableScanResponse")]
+        System.Threading.Tasks.Task<string> EnableScanAsync(string tagId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/DisableScan", ReplyAction="http://tempuri.org/ITagService/DisableScanResponse")]
+        System.Threading.Tasks.Task<string> DisableScanAsync(string tagId);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/SetOutputValue", ReplyAction="http://tempuri.org/ITagService/SetOutputValueResponse")]
+        System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllTags", ReplyAction="http://tempuri.org/ITagService/GetAllTagsResponse")]
+        System.Threading.Tasks.Task<ServiceReference1.Tag[]> GetAllTagsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAnalogInputTags", ReplyAction="http://tempuri.org/ITagService/GetAnalogInputTagsResponse")]
+        System.Threading.Tasks.Task<ServiceReference1.AnalogInputTag[]> GetAnalogInputTagsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAlarm", ReplyAction="http://tempuri.org/ITagService/AddAlarmResponse")]
+        System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveAlarm", ReplyAction="http://tempuri.org/ITagService/RemoveAlarmResponse")]
+        System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAlarms", ReplyAction="http://tempuri.org/ITagService/GetAlarmsResponse")]
+        System.Threading.Tasks.Task<ServiceReference1.Alarm[]> GetAlarmsAsync();
+    }
+    
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
+    public interface ITagServiceChannel : ServiceReference1.ITagService, System.ServiceModel.IClientChannel
     {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    public partial class AlarmServiceClient : System.ServiceModel.ClientBase<ServiceReference1.IAlarmService>, ServiceReference1.IAlarmService
+    public partial class TagServiceClient : System.ServiceModel.ClientBase<ServiceReference1.ITagService>, ServiceReference1.ITagService
     {
         
         /// <summary>
@@ -126,52 +354,102 @@ namespace ServiceReference1
         /// <param name="clientCredentials">The client credentials</param>
         static partial void ConfigureEndpoint(System.ServiceModel.Description.ServiceEndpoint serviceEndpoint, System.ServiceModel.Description.ClientCredentials clientCredentials);
         
-        public AlarmServiceClient() : 
-                base(AlarmServiceClient.GetDefaultBinding(), AlarmServiceClient.GetDefaultEndpointAddress())
+        public TagServiceClient() : 
+                base(TagServiceClient.GetDefaultBinding(), TagServiceClient.GetDefaultEndpointAddress())
         {
-            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_IAlarmService.ToString();
+            this.Endpoint.Name = EndpointConfiguration.BasicHttpBinding_ITagService.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AlarmServiceClient(EndpointConfiguration endpointConfiguration) : 
-                base(AlarmServiceClient.GetBindingForEndpoint(endpointConfiguration), AlarmServiceClient.GetEndpointAddress(endpointConfiguration))
-        {
-            this.Endpoint.Name = endpointConfiguration.ToString();
-            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
-        }
-        
-        public AlarmServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
-                base(AlarmServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
+        public TagServiceClient(EndpointConfiguration endpointConfiguration) : 
+                base(TagServiceClient.GetBindingForEndpoint(endpointConfiguration), TagServiceClient.GetEndpointAddress(endpointConfiguration))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AlarmServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
-                base(AlarmServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        public TagServiceClient(EndpointConfiguration endpointConfiguration, string remoteAddress) : 
+                base(TagServiceClient.GetBindingForEndpoint(endpointConfiguration), new System.ServiceModel.EndpointAddress(remoteAddress))
         {
             this.Endpoint.Name = endpointConfiguration.ToString();
             ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
         }
         
-        public AlarmServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public TagServiceClient(EndpointConfiguration endpointConfiguration, System.ServiceModel.EndpointAddress remoteAddress) : 
+                base(TagServiceClient.GetBindingForEndpoint(endpointConfiguration), remoteAddress)
+        {
+            this.Endpoint.Name = endpointConfiguration.ToString();
+            ConfigureEndpoint(this.Endpoint, this.ClientCredentials);
+        }
+        
+        public TagServiceClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress)
         {
         }
         
-        public System.Threading.Tasks.Task AddAlarmAsync(string tagName, string type, int priority, double threshold)
+        public System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit)
+        {
+            return base.Channel.AddAITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, unit);
+        }
+        
+        public System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit)
+        {
+            return base.Channel.AddAOTagAsync(tagId, description, ioAddress, value, initialValue, lowLimit, highLimit, unit);
+        }
+        
+        public System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn)
+        {
+            return base.Channel.AddDITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn);
+        }
+        
+        public System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue)
+        {
+            return base.Channel.AddDOTagAsync(tagId, description, ioAddress, value, initialValue);
+        }
+        
+        public System.Threading.Tasks.Task<string> RemoveTagAsync(string tagId)
+        {
+            return base.Channel.RemoveTagAsync(tagId);
+        }
+        
+        public System.Threading.Tasks.Task<string> EnableScanAsync(string tagId)
+        {
+            return base.Channel.EnableScanAsync(tagId);
+        }
+        
+        public System.Threading.Tasks.Task<string> DisableScanAsync(string tagId)
+        {
+            return base.Channel.DisableScanAsync(tagId);
+        }
+        
+        public System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value)
+        {
+            return base.Channel.SetOutputValueAsync(tagId, value);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.Tag[]> GetAllTagsAsync()
+        {
+            return base.Channel.GetAllTagsAsync();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference1.AnalogInputTag[]> GetAnalogInputTagsAsync()
+        {
+            return base.Channel.GetAnalogInputTagsAsync();
+        }
+        
+        public System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold)
         {
             return base.Channel.AddAlarmAsync(tagName, type, priority, threshold);
         }
         
-        public System.Threading.Tasks.Task RemoveAlarmAsync(string tagName)
+        public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName)
         {
             return base.Channel.RemoveAlarmAsync(tagName);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference1.Alarm[]> GetActiveAlarmsAsync()
+        public System.Threading.Tasks.Task<ServiceReference1.Alarm[]> GetAlarmsAsync()
         {
-            return base.Channel.GetActiveAlarmsAsync();
+            return base.Channel.GetAlarmsAsync();
         }
         
         public virtual System.Threading.Tasks.Task OpenAsync()
@@ -181,7 +459,7 @@ namespace ServiceReference1
         
         private static System.ServiceModel.Channels.Binding GetBindingForEndpoint(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAlarmService))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_ITagService))
             {
                 System.ServiceModel.BasicHttpBinding result = new System.ServiceModel.BasicHttpBinding();
                 result.MaxBufferSize = int.MaxValue;
@@ -195,27 +473,27 @@ namespace ServiceReference1
         
         private static System.ServiceModel.EndpointAddress GetEndpointAddress(EndpointConfiguration endpointConfiguration)
         {
-            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_IAlarmService))
+            if ((endpointConfiguration == EndpointConfiguration.BasicHttpBinding_ITagService))
             {
-                return new System.ServiceModel.EndpointAddress("http://localhost:64310/AlarmService.svc/Alarm");
+                return new System.ServiceModel.EndpointAddress("http://localhost:64310/DatabaseManagementService/TagService.svc/Tag");
             }
             throw new System.InvalidOperationException(string.Format("Could not find endpoint with name \'{0}\'.", endpointConfiguration));
         }
         
         private static System.ServiceModel.Channels.Binding GetDefaultBinding()
         {
-            return AlarmServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_IAlarmService);
+            return TagServiceClient.GetBindingForEndpoint(EndpointConfiguration.BasicHttpBinding_ITagService);
         }
         
         private static System.ServiceModel.EndpointAddress GetDefaultEndpointAddress()
         {
-            return AlarmServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_IAlarmService);
+            return TagServiceClient.GetEndpointAddress(EndpointConfiguration.BasicHttpBinding_ITagService);
         }
         
         public enum EndpointConfiguration
         {
             
-            BasicHttpBinding_IAlarmService,
+            BasicHttpBinding_ITagService,
         }
     }
 }

@@ -38,15 +38,18 @@ namespace ScadaCore.DatabaseManagementService
         string SetOutputValue (string tagId, double value);
 
         [OperationContract]
-        List<Tag> GetAllTags();
+        ICollection<Tag> GetAllTags();
 
         [OperationContract]
-        List<AnalogInputTag> GetAnalogInputTags();
+        ICollection<AnalogInputTag> GetAnalogInputTags();
 
         [OperationContract]
         string AddAlarm(string tagName, string type, int priority, double threshold);
 
         [OperationContract]
         string RemoveAlarm(string tagName);
+
+        [OperationContract]
+        List<Alarm> GetAlarms();
     }
 }

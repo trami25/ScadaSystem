@@ -1,11 +1,8 @@
 ﻿using System;
 using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Threading.Tasks;
-using ScadaCore.Tags.Model;
 using ServiceReference1;
 using ServiceReference2;
-
+using ScadaCore.Tags.Model;
 
 namespace DatabaseManager
 {

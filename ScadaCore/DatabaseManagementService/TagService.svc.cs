@@ -25,13 +25,13 @@ namespace ScadaCore.DatabaseManagementService
         private static readonly TagValueContext tagValueContext = new TagValueContext();
      
         private NamedPipeServerStream pipeServer;
-
+/*
         public TagService()
         {
             Task.Run(() => MonitorTags());
             Console.WriteLine("TagService initialized and monitoring started.");
         }
-
+*/
         public List<Alarm> GetAlarms()
         {
             var alarmsToReturn = new List<Alarm>(invokedAlarms);

@@ -1,4 +1,5 @@
-﻿using ScadaCore.Tags.Model;
+﻿using ScadaCore.Tags;
+using ScadaCore.Tags.Model;
 using SimulationDriver;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace ScadaCore.DatabaseManagementService
         private static List<Tag> tags = new List<Tag>();
         private static List<Alarm> alarms = new List<Alarm>();
         private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
+        private static readonly TagValueContext tagValueContext = new TagValueContext();
      
         private NamedPipeServerStream pipeServer;
 
@@ -112,13 +114,24 @@ namespace ScadaCore.DatabaseManagementService
             }
         }
 
+        // TODO: objekat koji belezi u bazi kada je tag promenjen (tagId, value, vreme)
         public string SetOutputValue(string tagId, double value)
         {
             var outputTag = tags.FirstOrDefault(t => t.Id == tagId);
+            TagValue tagValue = new TagValue();
             if (outputTag != null)
             {
                 outputTag.Value = value;
+                tagValue.TagId = tagId;
+                tagValue.Value = value;
+                tagValue.Timestamp = DateTime.Now;
+                using (TagValueContext context = new TagValueContext())
+                {
+                    tagValueContext.TagValues.Add(tagValue);
+                    tagValueContext.SaveChanges();
+                }
                 return $"Output value set for tag {tagId}: {value}";
+                
             }
             else
             {

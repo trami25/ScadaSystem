@@ -1,6 +1,8 @@
-﻿using ScadaCore.Tags.Model;
+﻿using ScadaCore.Tags;
+using ScadaCore.Tags.Model;
 using SimulationDriver;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Pipes;
@@ -20,6 +22,7 @@ namespace ScadaCore.DatabaseManagementService
         private static List<Alarm> alarms = new List<Alarm>();
         private static List<Alarm> invokedAlarms = new List<Alarm>();
         private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
+        private static readonly TagValueContext tagValueContext = new TagValueContext();
      
         private NamedPipeServerStream pipeServer;
 
@@ -40,11 +43,11 @@ namespace ScadaCore.DatabaseManagementService
             AnalogInputTag aiTag;
             if (driver == "r")
             {
-                aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver());
+                aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver(), new List<Alarm>());
             }
             else
             {
-                 aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver());
+                 aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver(), new List<Alarm>());
             }
                 tags.Add(aiTag);
             string message = $"Analog Input Tag added: {tagId}";
@@ -152,13 +155,24 @@ namespace ScadaCore.DatabaseManagementService
             }
         }
 
+        // TODO: objekat koji belezi u bazi kada je tag promenjen (tagId, value, vreme)
         public string SetOutputValue(string tagId, double value)
         {
             var outputTag = tags.FirstOrDefault(t => t.Id == tagId);
+            TagValue tagValue = new TagValue();
             if (outputTag != null)
             {
                 outputTag.Value = value;
+                tagValue.TagId = tagId;
+                tagValue.Value = value;
+                tagValue.Timestamp = DateTime.Now;
+                using (TagValueContext context = new TagValueContext())
+                {
+                    tagValueContext.TagValues.Add(tagValue);
+                    tagValueContext.SaveChanges();
+                }
                 return $"Output value set for tag {tagId}: {value}";
+                
             }
             else
             {

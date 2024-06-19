@@ -23,11 +23,18 @@ namespace RTUnit
             RTDriver.RTDriver driver = new RTDriver.RTDriver();
             driver.ReceiveData(address, lowerLimit, upperLimit);
 
-            //Random random = new Random();
             while (true)
             {
                 double value = driver.ReturnValue(address);
-                Console.WriteLine($"Generated value: {value} for address: {address}");
+                string message = $"Generated value: {value} for address: {address}";
+                byte[] signature = driver.SignData(message);
+
+                Console.WriteLine(message);
+                Console.WriteLine($"Signature: {Convert.ToBase64String(signature)}");
+
+                // Verifikacija potpisa (simulacija servisa)
+                bool isValid = driver.VerifyData(message, signature);
+                Console.WriteLine($"Is signature valid? {isValid}");
 
                 Thread.Sleep(500);
             }

@@ -13,13 +13,13 @@ namespace ScadaCore.DatabaseManagementService
     public interface ITagService
     {
         [OperationContract]
-        string AddAITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit); //+ new MainSimulationDruiver()
+        string AddAITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit, string driver);
 
         [OperationContract]
         string AddAOTag(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit);
 
         [OperationContract]
-        string AddDITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn); //+ new MainSimulationDruiver()
+        string AddDITag(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, string driver);
 
         [OperationContract]
         string AddDOTag(string tagId, string description, string ioAddress, double value, double initialValue);
@@ -38,15 +38,34 @@ namespace ScadaCore.DatabaseManagementService
         string SetOutputValue (string tagId, double value);
 
         [OperationContract]
-        List<Tag> GetAllTags();
+        ICollection<TagData> GetAllTags();
 
         [OperationContract]
-        List<AnalogInputTag> GetAnalogInputTags();
+        ICollection<TagData> GetAnalogInputTags();
+
+        [OperationContract]
+        ICollection<TagData> GetOutputTags();
 
         [OperationContract]
         string AddAlarm(string tagName, string type, int priority, double threshold);
 
         [OperationContract]
         string RemoveAlarm(string tagName);
+
+        [OperationContract]
+        ICollection<TagData> GetInputTags();
+
+        [OperationContract]
+        List<Alarm> GetAlarms();
+    }
+
+    [DataContract]
+    public class TagData
+    {
+        [DataMember]
+        public string Id { get; set; }
+
+        [DataMember]
+        public double Value { get; set; }
     }
 }

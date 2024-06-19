@@ -1,42 +1,37 @@
 using System;
-using System.IO;
-using System.IO.Pipes;
+using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using ServiceReference1;
 
-namespace AlarmDisplay
+class Program
 {
-    class Program
+    static async Task Main(string[] args)
     {
-        static async Task Main(string[] args)
+        TagServiceClient client = new TagServiceClient();
+        int iS=0;
+        while (true)
         {
-            await StartNamedPipeClient();
-        }
-
-        private static async Task StartNamedPipeClient()
-        {
-            using (var pipeClient = new NamedPipeClientStream(".", "AlarmPipe", PipeDirection.In))
+           
+            try
             {
-                try
+                var invokedAlarms = await client.GetAlarmsAsync();
+                foreach (var alarm in invokedAlarms)
                 {
-                    Console.WriteLine("Connecting to server...");
-                    pipeClient.Connect();
-                    Console.WriteLine("Connected to server.");
-
-                    using (var sr = new StreamReader(pipeClient))
+                    for (int i = 0; i < alarm.Priority; i++)
                     {
-                        string message;
-                        while ((message = await sr.ReadLineAsync()) != null)
-                        {
-                            Console.WriteLine($"Received notification: {message}");
-                        }
+                        Console.WriteLine($"Alarm triggered: Tag={alarm.TagName}, Type={alarm.Type}, Threshold={alarm.Threshold}, Priority={alarm.Priority}");
                     }
                 }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"Failed to connect or read from server. Exception: {ex.Message}");
-                }
             }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"Error fetching invoked alarms: {ex.Message}");
+            }
+
+            await Task.Delay(5000);
         }
     }
 }
+

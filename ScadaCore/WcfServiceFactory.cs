@@ -21,21 +21,31 @@ namespace ScadaCore
         {
             container
                 .AddExtension(new Diagnostic())
-                .RegisterType<ITrendingService, TrendingService>()
-                .RegisterType<IRTUnitService, RTUnitService>()
-                .RegisterSingleton<TagRepository>()
-                .RegisterType<IDriver, MainSimulationDriver>("SimulationDriver")
-                .RegisterType<IDriver, RTDriver.RTDriver>("RTDriver")
+                .RegisterSingleton<MainSimulationDriver>()
+                .RegisterSingleton<RTDriver.RTDriver>();
+
+            var simulationDriver = container.Resolve<MainSimulationDriver>();
+            var rtDriver = container.Resolve<RTDriver.RTDriver>();
+
+            container
                 .RegisterSingleton<ScadaConfiguration>(
                     new InjectionConstructor(
                             @"../../scadaConfig.xml",
-                            new ResolvedParameter<IDriver>("SimulationDriver"),
-                            new ResolvedParameter<IDriver>("RTDriver")
+                            simulationDriver,
+                            rtDriver
                         )
                 )
+                .RegisterSingleton<TagRepository>()
                 .RegisterSingleton<TagProcessor>()
                 .RegisterSingleton<TagService>()
-                .RegisterType<TagContext>(new HierarchicalLifetimeManager());
+                .RegisterType<TagContext>(new HierarchicalLifetimeManager())
+                .RegisterType<RTUnitContext>()
+                .RegisterType<ITrendingService, TrendingService>()
+                .RegisterType<IRTUnitService, RTUnitService>(
+                    new InjectionConstructor(
+                            rtDriver
+                        )
+                );
         }
     }
 }

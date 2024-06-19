@@ -1,5 +1,7 @@
 ﻿using DriverApi;
+using RTDriver;
 using ScadaCore.Tags.Model;
+using SimulationDriver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +18,7 @@ namespace ScadaCore.Configuration
         private readonly IDriver _simulationDriver;
         private readonly IDriver _rtuDriver;
 
-        public ScadaConfiguration(string configPath, IDriver simulationDriver, IDriver rtuDriver)
+        public ScadaConfiguration(string configPath, MainSimulationDriver simulationDriver, RTDriver.RTDriver rtuDriver)
         {
             _xml = XDocument.Load(configPath);
             _simulationDriver = simulationDriver;

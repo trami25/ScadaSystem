@@ -24,7 +24,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManager", "ReportMana
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTDriver", "RTDriver\RTDriver.csproj", "{B3AA1E7C-C3E3-4F68-9F3C-87A67C54F729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnitTemp\RTUnit.csproj", "{A0B5D8B7-A843-4C3B-A07F-293C191423D9}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnit\RTUnit.csproj", "{A0B5D8B7-A843-4C3B-A07F-293C191423D9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1B8DAC8C-922B-489C-891A-1646C765F794} = {1B8DAC8C-922B-489C-891A-1646C765F794}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

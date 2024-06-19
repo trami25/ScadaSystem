@@ -39,18 +39,10 @@ namespace ScadaCore.Tags.Model
             while (IsScanOn)
             {
                 Value = Driver.ReturnValue(IOAddress);
-                tagValue.Value = Value;
-                tagValue.Timestamp = DateTime.Now;
 
-                // Use separate DbContext instances for each operation to ensure thread safety
-                using (TagContext tagContext = new TagContext())
-                {
-                    // Assuming 'this' is a Tag object and it has been properly initialized
-                    tagContext.Tags.AddOrUpdate((Tag)this);
-                    tagContext.SaveChanges(); // Save changes to ensure context state is updated
-                    // Set TagId after ensuring 'this' has been saved
-                    tagValue.TagId = this.Id;
-                }
+                tagValue.Value = Value;
+                tagValue.TagId = Id;
+                tagValue.Timestamp = DateTime.Now;
 
                 using (TagValueContext tagValueContext = new TagValueContext())
                 {

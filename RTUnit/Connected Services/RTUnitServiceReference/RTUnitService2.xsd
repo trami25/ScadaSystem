@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import schemaLocation="http://localhost:64310/RTUnitService.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/ScadaCore" />
+  <xs:import schemaLocation="http://localhost:64310/RTUnitService.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/System.Security.Cryptography" />
+  <xs:element name="AddUnit">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.datacontract.org/2004/07/ScadaCore" minOccurs="0" name="unit" nillable="true" type="q1:RTUnit" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AddUnitResponse">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WriteValue">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="address" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="value" type="xs:double" />
+        <xs:element minOccurs="0" name="signature" nillable="true" type="xs:base64Binary" />
+        <xs:element xmlns:q2="http://schemas.datacontract.org/2004/07/System.Security.Cryptography" minOccurs="0" name="publicKey" type="q2:RSAParameters" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

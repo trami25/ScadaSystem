@@ -32,7 +32,7 @@ namespace RTUnit
                 Console.WriteLine(message);
                 Console.WriteLine($"Signature: {Convert.ToBase64String(signature)}");
 
-                // Verifikacija potpisa (simulacija servisa)
+       //verify signature
                 bool isValid = driver.VerifyData(message, signature);
                 Console.WriteLine($"Is signature valid? {isValid}");
 

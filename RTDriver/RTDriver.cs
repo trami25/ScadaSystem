@@ -1,6 +1,8 @@
 ﻿using DriverApi;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Migrations;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
@@ -8,73 +10,58 @@ namespace RTDriver
 {
     public class RTDriver : IDriver
     {
-        private Dictionary<string, (double lowerLimit, double upperLimit)> _limits = new Dictionary<string, (double lowerLimit, double upperLimit)>();
-        private Dictionary<string, List<double>> _data = new Dictionary<string, List<double>>();
-        private Random _random = new Random();
-        private RSAParameters _privateKey;
-        private RSAParameters _publicKey;
-
-        public RTDriver()
+        public void AddUnit(RTUnit unit)
         {
-            GenerateKeys();
-        }
-
-        private void GenerateKeys()
-        {
-            using (var rsa = new RSACryptoServiceProvider(2048))
+            using (var context = new RTUnitContext())
             {
-                rsa.PersistKeyInCsp = false;
-                _privateKey = rsa.ExportParameters(true);
-                _publicKey = rsa.ExportParameters(false);
+                context.Units.AddOrUpdate(unit);
+                context.SaveChanges();
             }
-        }
-
-        public void ReceiveData(string address, double lowerLimit, double upperLimit)
-        {
-            _limits[address] = (lowerLimit, upperLimit);
-            _data[address] = new List<double>();
         }
 
         public double ReturnValue(string address)
         {
-            if (_limits.ContainsKey(address))
+            RTUnit unit;
+            using (var context = new RTUnitContext())
             {
-                double value = GenerateRandomValue(_limits[address].lowerLimit, _limits[address].upperLimit);
-                _data[address].Add(value);
-                return value;
+                unit = context.Units.FirstOrDefault(u => u.Address == address);
             }
-            else
+
+            if (unit == null)
             {
                 throw new ArgumentException($"Address {address} not found.");
             }
+
+            return unit.Value;
         }
 
-        private double GenerateRandomValue(double lowerLimit, double upperLimit)
+        public void WriteValue(string address, double value, byte[] signature, RSAParameters publicKey)
         {
-            return _random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
-        }
-
-        public List<double> GetDataForAddress(string address)
-        {
-            return _data.ContainsKey(address) ? _data[address] : new List<double>();
-        }
-
-        public byte[] SignData(string message)
-        {
-            byte[] data = Encoding.UTF8.GetBytes(message);
-            using (var rsa = new RSACryptoServiceProvider())
+            RTUnit unit;
+            using (var context = new RTUnitContext())
             {
-                rsa.ImportParameters(_privateKey);
-                return rsa.SignData(data, CryptoConfig.MapNameToOID("SHA256"));
+                unit = context.Units.FirstOrDefault(u => u.Address == address);
+                if (unit == null)
+                {
+                    throw new ArgumentException($"Address {address} not found.");
+                }
+
+                var valid = VerifyData(value.ToString(), signature, publicKey);
+                if (!valid)
+                {
+                    throw new ArgumentException("Signature not valid");
+                }
+                unit.Value = value;
+                context.SaveChanges();
             }
         }
 
-        public bool VerifyData(string message, byte[] signature)
+        public bool VerifyData(string message, byte[] signature, RSAParameters publicKey)
         {
             byte[] data = Encoding.UTF8.GetBytes(message);
             using (var rsa = new RSACryptoServiceProvider())
             {
-                rsa.ImportParameters(_publicKey);
+                rsa.ImportParameters(publicKey);
                 return rsa.VerifyData(data, CryptoConfig.MapNameToOID("SHA256"), signature);
             }
         }

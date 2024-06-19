@@ -1,13 +1,42 @@
-﻿using System;
+﻿using RTUnitTemp.RTUnitServiceReference;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Cryptography;
+using System.Security.Cryptography.X509Certificates;
+using System.Text;
 using System.Threading;
-using RTDriver;
+using System.Threading.Tasks;
 
-namespace RTUnit
+namespace RTUnitTemp
 {
-    class Program
+    internal class Program
     {
+        public static byte[] SignData(string message, RSAParameters privateKey)
+        {
+            byte[] data = Encoding.UTF8.GetBytes(message);
+            using (var rsa = new RSACryptoServiceProvider())
+            {
+                rsa.ImportParameters(privateKey);
+                return rsa.SignData(data, CryptoConfig.MapNameToOID("SHA256"));
+            }
+        }
+
         static void Main(string[] args)
         {
+            RSAParameters privateKey;
+            RSAParameters publicKey;
+            using (var rsa = new RSACryptoServiceProvider(2048))
+            {
+                rsa.PersistKeyInCsp = false;
+                privateKey = rsa.ExportParameters(true);
+                publicKey = rsa.ExportParameters(false);
+            }
+
+            var random = new Random();
+
+            var client = new RTUnitServiceClient();
+
             Console.WriteLine("Enter RTU ID:");
             string rtuId = Console.ReadLine();
 
@@ -20,21 +49,23 @@ namespace RTUnit
             Console.WriteLine("Enter upper limit:");
             double upperLimit = double.Parse(Console.ReadLine());
 
-            RTDriver.RTDriver driver = new RTDriver.RTDriver();
-            driver.ReceiveData(address, lowerLimit, upperLimit);
+            client.AddUnit(new RTUnit
+            {
+                Address = address,
+                LowerLimit = lowerLimit,
+                UpperLimit = upperLimit
+            });
 
             while (true)
             {
-                double value = driver.ReturnValue(address);
+                double value = random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
                 string message = $"Generated value: {value} for address: {address}";
-                byte[] signature = driver.SignData(message);
+                byte[] signature = SignData(value.ToString(), privateKey);
 
                 Console.WriteLine(message);
                 Console.WriteLine($"Signature: {Convert.ToBase64String(signature)}");
 
-       //verify signature
-                bool isValid = driver.VerifyData(message, signature);
-                Console.WriteLine($"Is signature valid? {isValid}");
+                client.WriteValue(address, value, signature, publicKey);
 
                 Thread.Sleep(500);
             }

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="17e6cf23-db2c-43f2-b148-7ae93b1c8ff9" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
+    <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings />
+    <GenerateSerializableTypes>true</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:64310/RTUnitService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="RTUnitService.xsd" MetadataType="Schema" ID="d81b0e1c-e404-49ab-835c-63d9540b993a" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?xsd=xsd2" />
+    <MetadataFile FileName="RTUnitService1.xsd" MetadataType="Schema" ID="44511119-c47c-4ce5-9dd8-08c4689895d4" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?xsd=xsd3" />
+    <MetadataFile FileName="RTUnitService2.xsd" MetadataType="Schema" ID="c0da729c-3647-4c85-ad19-e28c97ec4dfd" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?xsd=xsd0" />
+    <MetadataFile FileName="RTUnitService3.xsd" MetadataType="Schema" ID="9457a630-9bcf-4f94-ba9b-655ea68e262f" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?xsd=xsd1" />
+    <MetadataFile FileName="RTUnitService.wsdl" MetadataType="Wsdl" ID="6618cfdb-94c3-40d6-b2bd-1ffccbed1d06" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?wsdl" />
+    <MetadataFile FileName="RTUnitService.disco" MetadataType="Disco" ID="60e6cd9f-4939-40ae-a099-dbd6f042dd4f" SourceId="1" SourceUrl="http://localhost:64310/RTUnitService.svc?disco" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

@@ -9,7 +9,7 @@ namespace RTDriver
     public class RTDriver : IDriver
     {
         private Dictionary<string, (double lowerLimit, double upperLimit)> _limits = new Dictionary<string, (double lowerLimit, double upperLimit)>();
-        private Dictionary<string, List<double>> _data = new Dictionary<string, List<double>>();
+        private Dictionary<string, double> _data = new Dictionary<string, double>();
         private Random _random = new Random();
         private RSAParameters _privateKey;
         private RSAParameters _publicKey;
@@ -32,7 +32,7 @@ namespace RTDriver
         public void ReceiveData(string address, double lowerLimit, double upperLimit)
         {
             _limits[address] = (lowerLimit, upperLimit);
-            _data[address] = new List<double>();
+            _data[address] = 0.0;
         }
 
         public double ReturnValue(string address)
@@ -40,7 +40,7 @@ namespace RTDriver
             if (_limits.ContainsKey(address))
             {
                 double value = GenerateRandomValue(_limits[address].lowerLimit, _limits[address].upperLimit);
-                _data[address].Add(value);
+                _data[address] = value;
                 return value;
             }
             else
@@ -54,9 +54,9 @@ namespace RTDriver
             return _random.NextDouble() * (upperLimit - lowerLimit) + lowerLimit;
         }
 
-        public List<double> GetDataForAddress(string address)
+        public double GetDataForAddress(string address)
         {
-            return _data.ContainsKey(address) ? _data[address] : new List<double>();
+            return _data.ContainsKey(address) ? _data[address] : 0.0;
         }
 
         public byte[] SignData(string message)

@@ -19,6 +19,8 @@ namespace ScadaCore.Tags.Model
         [DataMember]
         public IDriver Driver { get; }
 
+        private static readonly TagValueContext tagValueContext = new TagValueContext();
+
         public InputTag()
         {
         }
@@ -30,20 +32,35 @@ namespace ScadaCore.Tags.Model
             Driver = driver;
         }
 
+        // TODO: ovde isto objekat za promenu vrednosti
         public void ReadValue()
         {
+            TagValue tagValue = new TagValue();
             while (IsScanOn)
             {
                 Value = Driver.ReturnValue(IOAddress);
+                tagValue.Value = Value;
+                tagValue.Timestamp = DateTime.Now;
 
-                // TODO: Add only tag values to db
-                //using (TagContext context = new TagContext())
-                //{
-                //    context.Tags.AddOrUpdate((Tag)this);
-                //}
+                // Use separate DbContext instances for each operation to ensure thread safety
+                using (TagContext tagContext = new TagContext())
+                {
+                    // Assuming 'this' is a Tag object and it has been properly initialized
+                    tagContext.Tags.AddOrUpdate((Tag)this);
+                    tagContext.SaveChanges(); // Save changes to ensure context state is updated
+                    // Set TagId after ensuring 'this' has been saved
+                    tagValue.TagId = this.Id;
+                }
+
+                using (TagValueContext tagValueContext = new TagValueContext())
+                {
+                    tagValueContext.TagValues.Add(tagValue);
+                    tagValueContext.SaveChanges(); // Save changes immediately
+                }
 
                 Thread.Sleep(ScanTime);
             }
         }
+
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DriverApi;
+using RTDriver;
 using ScadaCore.Configuration;
 using ScadaCore.Tags;
 using SimulationDriver;
@@ -21,15 +22,20 @@ namespace ScadaCore
             container
                 .AddExtension(new Diagnostic())
                 .RegisterType<ITrendingService, TrendingService>()
+                .RegisterType<IRTUnitService, RTUnitService>()
                 .RegisterSingleton<TagRepository>()
-                .RegisterSingleton<ScadaConfiguration>()
-                .RegisterType<IDriver, MainSimulationDriver>()
+                .RegisterType<IDriver, MainSimulationDriver>("SimulationDriver")
+                .RegisterType<IDriver, RTDriver.RTDriver>("RTDriver")
+                .RegisterSingleton<ScadaConfiguration>(
+                    new InjectionConstructor(
+                            @"../../scadaConfig.xml",
+                            new ResolvedParameter<IDriver>("SimulationDriver"),
+                            new ResolvedParameter<IDriver>("RTDriver")
+                        )
+                )
                 .RegisterSingleton<TagProcessor>()
                 .RegisterSingleton<TagService>()
                 .RegisterType<TagContext>(new HierarchicalLifetimeManager());
-
-            container
-                .Resolve<ScadaConfiguration>(new ParameterOverride("configPath", @"../../scadaConfig.xml"));
         }
     }
 }

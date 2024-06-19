@@ -235,6 +235,7 @@
     <Content Include="Authentication.svc" />
     <Content Include="DatabaseManagementService\TagService.svc" />
     <Content Include="ReportService.svc" />
+    <Content Include="RTUnitService.svc" />
     <Content Include="TrendingService.svc" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -249,6 +250,7 @@
     </Compile>
     <Compile Include="IAlarmService.cs" />
     <Compile Include="IReportService.cs" />
+    <Compile Include="IRTUnitService.cs" />
     <Compile Include="ISimpleService.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.cs" />
     <Compile Include="Migrations\20240614152019_InitialCreate.Designer.cs">
@@ -265,6 +267,9 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ReportService.svc.cs">
       <DependentUpon>ReportService.svc</DependentUpon>
+    </Compile>
+    <Compile Include="RTUnitService.svc.cs">
+      <DependentUpon>RTUnitService.svc</DependentUpon>
     </Compile>
     <Compile Include="Tags\Model\AnalogInputTag.cs" />
     <Compile Include="Tags\Model\AnalogOutputTag.cs" />
@@ -304,6 +309,10 @@
     <ProjectReference Include="..\DriverApi\DriverApi.csproj">
       <Project>{3127ef2c-d932-4317-88c0-f775f8471c1d}</Project>
       <Name>DriverApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RTDriver\RTDriver.csproj">
+      <Project>{b3aa1e7c-c3e3-4f68-9f3c-87a67c54f729}</Project>
+      <Name>RTDriver</Name>
     </ProjectReference>
     <ProjectReference Include="..\SimulationDriver\SimulationDriver.csproj">
       <Project>{6c4e4e4a-9849-4b19-b124-6a52136a6e9a}</Project>

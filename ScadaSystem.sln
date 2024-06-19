@@ -24,7 +24,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ReportManager", "ReportMana
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTDriver", "RTDriver\RTDriver.csproj", "{B3AA1E7C-C3E3-4F68-9F3C-87A67C54F729}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnit\RTUnit.csproj", "{456531C7-EF0D-4CCB-BFF0-6581F6C58EB1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RTUnit", "RTUnitTemp\RTUnit.csproj", "{A0B5D8B7-A843-4C3B-A07F-293C191423D9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,10 +68,10 @@ Global
 		{B3AA1E7C-C3E3-4F68-9F3C-87A67C54F729}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B3AA1E7C-C3E3-4F68-9F3C-87A67C54F729}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B3AA1E7C-C3E3-4F68-9F3C-87A67C54F729}.Release|Any CPU.Build.0 = Release|Any CPU
-		{456531C7-EF0D-4CCB-BFF0-6581F6C58EB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{456531C7-EF0D-4CCB-BFF0-6581F6C58EB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{456531C7-EF0D-4CCB-BFF0-6581F6C58EB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{456531C7-EF0D-4CCB-BFF0-6581F6C58EB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B5D8B7-A843-4C3B-A07F-293C191423D9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B5D8B7-A843-4C3B-A07F-293C191423D9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B5D8B7-A843-4C3B-A07F-293C191423D9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B5D8B7-A843-4C3B-A07F-293C191423D9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

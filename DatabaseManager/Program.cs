@@ -109,10 +109,30 @@ namespace DatabaseManager
                         }
                         else if (choice == "2")
                         {
+                            var existingTags = await tagProxy.GetAllTagsAsync();
+                            Console.WriteLine("Available Tags:");
+                            foreach (var tag in existingTags)
+                            {
+                                Console.WriteLine($"ID: {tag.Id}, Value: {tag.Value}");
+                            }
+
+                            string tagId;
+                            while (true)
+                            {
+                                Console.Write("Enter tag ID: ");
+                                tagId = Console.ReadLine();
+                                if (existingTags.Any(t => t.Id == tagId))
+                                {
+                                    Console.WriteLine("Tag ID already exists. Please enter a different ID.");
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
+
                             Console.Write("Enter tag type (AnalogInput/AnalogOutput/DigitalInput/DigitalOutput): ");
                             var tagType = Console.ReadLine();
-                            Console.Write("Enter tag ID: ");
-                            var tagId = Console.ReadLine();
                             Console.Write("Enter description: ");
                             var description = Console.ReadLine();
                             Console.Write("Enter IO address: ");
@@ -130,8 +150,22 @@ namespace DatabaseManager
                                 var highLimit = double.Parse(Console.ReadLine());
                                 Console.Write("Enter unit (Kg/Ms/C/F): ");
                                 var unit =  Console.ReadLine();
+                                string driver;
+                                while (true)
+                                {
+                                    Console.Write("Enterthe driver (r/s): ");
+                                    driver = Console.ReadLine();
+                                    if (driver!="r" && driver != "s")
+                                    {
+                                        Console.WriteLine("Please enter the correct letter!.");
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
 
-                                resultMessage = await tagProxy.AddAITagAsync(tagId, description, ioAddress, value, scanTime, true, lowLimit, highLimit, unit);
+                                resultMessage = await tagProxy.AddAITagAsync(tagId, description, ioAddress, value, scanTime, true, lowLimit, highLimit, unit, driver);
                                 Console.WriteLine(resultMessage);
                             }
                             else if (tagType == "AnalogOutput")
@@ -151,7 +185,22 @@ namespace DatabaseManager
                                 Console.Write("Enter scan time: ");
                                 var scanTime = int.Parse(Console.ReadLine());
 
-                                resultMessage = await tagProxy.AddDITagAsync(tagId, description, ioAddress, value, scanTime, true);
+                                string driver;
+                                while (true)
+                                {
+                                    Console.Write("Enterthe driver (r/s): ");
+                                    driver = Console.ReadLine();
+                                    if (driver != "r" && driver != "s")
+                                    {
+                                        Console.WriteLine("Please enter the correct letter!.");
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+
+                                resultMessage = await tagProxy.AddDITagAsync(tagId, description, ioAddress, value, scanTime, true,driver);
                                 Console.WriteLine(resultMessage);
                             }
                             else if (tagType == "DigitalOutput")
@@ -166,6 +215,13 @@ namespace DatabaseManager
                         }
                         else if (choice == "3")
                         {
+                            var analogInputs = await tagProxy.GetAllTagsAsync();
+                            Console.WriteLine("Available Analog Input Tags:");
+                            foreach (var input in analogInputs)
+                            {
+                                Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
+                            }
+
                             Console.Write("Enter tag ID to remove: ");
                             var tagId = Console.ReadLine();
 
@@ -174,6 +230,13 @@ namespace DatabaseManager
                         }
                         else if (choice == "4")
                         {
+                            var analogInputs = await tagProxy.GetInputTagsAsync();
+                            Console.WriteLine("Available Analog Input Tags:");
+                            foreach (var input in analogInputs)
+                            {
+                                Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
+                            }
+
                             Console.Write("Enter tag ID to enable scan: ");
                             var tagId = Console.ReadLine();
 
@@ -182,6 +245,13 @@ namespace DatabaseManager
                         }
                         else if (choice == "5")
                         {
+                            var analogInputs = await tagProxy.GetInputTagsAsync();
+                            Console.WriteLine("Available Analog Input Tags:");
+                            foreach (var input in analogInputs)
+                            {
+                                Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
+                            }
+
                             Console.Write("Enter tag ID to disable scan: ");
                             var tagId = Console.ReadLine();
 
@@ -190,6 +260,13 @@ namespace DatabaseManager
                         }
                         else if (choice == "6")
                         {
+                            var tags = await tagProxy.GetOutputTagsAsync();
+                            Console.WriteLine("Available Output Tags:");
+                            foreach (var tag in tags)
+                            {
+                                Console.WriteLine($"Tag ID: {tag.Id}, Value: {tag.Value}");
+                            }
+
                             Console.Write("Enter tag ID to set value: ");
                             var tagId = Console.ReadLine();
                             Console.Write("Enter value: ");
@@ -200,25 +277,23 @@ namespace DatabaseManager
                         }
                         else if (choice == "7")
                         {
-                            var tags = await tagProxy.GetAllTagsAsync();
+                            var tags = await tagProxy.GetOutputTagsAsync();
+                            Console.WriteLine("Available Output Tags:");
                             foreach (var tag in tags)
                             {
-                                if (tag is AnalogOutputTag || tag is DigitalOutputTag)
-                                {
                                     Console.WriteLine($"Tag ID: {tag.Id}, Value: {tag.Value}");
-                                }
                             }
                         }
                         else if (choice == "8")
                         {
-                            /*
+                            
                            var analogInputs = await tagProxy.GetAnalogInputTagsAsync();
                             Console.WriteLine("Available Analog Input Tags:");
                             foreach (var input in analogInputs)
                             {
-                                Console.WriteLine($"ID: {input.Id}, Description: {input.Description}");
+                                Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
                             }
-                           */
+                           
                             Console.Write("Enter tag name to add alarm: ");
                             var tagName = Console.ReadLine();
                             Console.Write("Enter alarm type (High/Low): ");
@@ -233,6 +308,13 @@ namespace DatabaseManager
                         }
                         else if (choice == "9")
                         {
+                            var analogInputs = await tagProxy.GetAnalogInputTagsAsync();
+                            Console.WriteLine("Available Analog Input Tags:");
+                            foreach (var input in analogInputs)
+                            {
+                                Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
+                            }
+
                             Console.Write("Enter tag name to remove alarm: ");
                             var tagName = Console.ReadLine();
 

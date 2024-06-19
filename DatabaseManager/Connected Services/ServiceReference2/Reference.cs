@@ -14,45 +14,13 @@ namespace ServiceReference2
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Tag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.InputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
-    public partial class Tag : object
+    [System.Runtime.Serialization.DataContractAttribute(Name="TagData", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.DatabaseManagementService")]
+    public partial class TagData : object
     {
-        
-        private string DescriptionField;
-        
-        private string IOAddressField;
         
         private string IdField;
         
         private double ValueField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string Description
-        {
-            get
-            {
-                return this.DescriptionField;
-            }
-            set
-            {
-                this.DescriptionField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public string IOAddress
-        {
-            get
-            {
-                return this.IOAddressField;
-            }
-            set
-            {
-                this.IOAddressField = value;
-            }
-        }
         
         [System.Runtime.Serialization.DataMemberAttribute()]
         public string Id
@@ -77,117 +45,6 @@ namespace ServiceReference2
             set
             {
                 this.ValueField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="InputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Alarm[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Alarm))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Tag))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.AnalogInputTag[]))]
-    [System.Runtime.Serialization.KnownTypeAttribute(typeof(ServiceReference2.Unit))]
-    public partial class InputTag : ServiceReference2.Tag
-    {
-        
-        private object DriverField;
-        
-        private bool IsScanOnField;
-        
-        private int ScanTimeField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public object Driver
-        {
-            get
-            {
-                return this.DriverField;
-            }
-            set
-            {
-                this.DriverField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public bool IsScanOn
-        {
-            get
-            {
-                return this.IsScanOnField;
-            }
-            set
-            {
-                this.IsScanOnField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public int ScanTime
-        {
-            get
-            {
-                return this.ScanTimeField;
-            }
-            set
-            {
-                this.ScanTimeField = value;
-            }
-        }
-    }
-    
-    [System.Diagnostics.DebuggerStepThroughAttribute()]
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="AnalogInputTag", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    public partial class AnalogInputTag : ServiceReference2.InputTag
-    {
-        
-        private double HighLimitField;
-        
-        private double LowLimitField;
-        
-        private ServiceReference2.Unit UnitField;
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double HighLimit
-        {
-            get
-            {
-                return this.HighLimitField;
-            }
-            set
-            {
-                this.HighLimitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public double LowLimit
-        {
-            get
-            {
-                return this.LowLimitField;
-            }
-            set
-            {
-                this.LowLimitField = value;
-            }
-        }
-        
-        [System.Runtime.Serialization.DataMemberAttribute()]
-        public ServiceReference2.Unit Unit
-        {
-            get
-            {
-                return this.UnitField;
-            }
-            set
-            {
-                this.UnitField = value;
             }
         }
     }
@@ -275,36 +132,18 @@ namespace ServiceReference2
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
-    [System.Runtime.Serialization.DataContractAttribute(Name="Unit", Namespace="http://schemas.datacontract.org/2004/07/ScadaCore.Tags.Model")]
-    public enum Unit : int
-    {
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Kg = 0,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        Ms = 1,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        C = 2,
-        
-        [System.Runtime.Serialization.EnumMemberAttribute()]
-        F = 3,
-    }
-    
-    [System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.Tools.ServiceModel.Svcutil", "2.2.0-preview1.23462.5")]
     [System.ServiceModel.ServiceContractAttribute(ConfigurationName="ServiceReference2.ITagService")]
     public interface ITagService
     {
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAITag", ReplyAction="http://tempuri.org/ITagService/AddAITagResponse")]
-        System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit);
+        System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit, string driver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAOTag", ReplyAction="http://tempuri.org/ITagService/AddAOTagResponse")]
         System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDITag", ReplyAction="http://tempuri.org/ITagService/AddDITagResponse")]
-        System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn);
+        System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, string driver);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddDOTag", ReplyAction="http://tempuri.org/ITagService/AddDOTagResponse")]
         System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue);
@@ -322,16 +161,22 @@ namespace ServiceReference2
         System.Threading.Tasks.Task<string> SetOutputValueAsync(string tagId, double value);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAllTags", ReplyAction="http://tempuri.org/ITagService/GetAllTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync();
+        System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetAllTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAnalogInputTags", ReplyAction="http://tempuri.org/ITagService/GetAnalogInputTagsResponse")]
-        System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync();
+        System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetAnalogInputTagsAsync();
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetOutputTags", ReplyAction="http://tempuri.org/ITagService/GetOutputTagsResponse")]
+        System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetOutputTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAlarm", ReplyAction="http://tempuri.org/ITagService/AddAlarmResponse")]
         System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveAlarm", ReplyAction="http://tempuri.org/ITagService/RemoveAlarmResponse")]
         System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName);
+        
+        [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetInputTags", ReplyAction="http://tempuri.org/ITagService/GetInputTagsResponse")]
+        System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetInputTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetAlarms", ReplyAction="http://tempuri.org/ITagService/GetAlarmsResponse")]
         System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetAlarmsAsync();
@@ -387,9 +232,9 @@ namespace ServiceReference2
         {
         }
         
-        public System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit)
+        public System.Threading.Tasks.Task<string> AddAITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, double lowLimit, double highLimit, string unit, string driver)
         {
-            return base.Channel.AddAITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, unit);
+            return base.Channel.AddAITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, unit, driver);
         }
         
         public System.Threading.Tasks.Task<string> AddAOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue, double lowLimit, double highLimit, string unit)
@@ -397,9 +242,9 @@ namespace ServiceReference2
             return base.Channel.AddAOTagAsync(tagId, description, ioAddress, value, initialValue, lowLimit, highLimit, unit);
         }
         
-        public System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn)
+        public System.Threading.Tasks.Task<string> AddDITagAsync(string tagId, string description, string ioAddress, double value, int scanTime, bool isScanOn, string driver)
         {
-            return base.Channel.AddDITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn);
+            return base.Channel.AddDITagAsync(tagId, description, ioAddress, value, scanTime, isScanOn, driver);
         }
         
         public System.Threading.Tasks.Task<string> AddDOTagAsync(string tagId, string description, string ioAddress, double value, double initialValue)
@@ -427,14 +272,19 @@ namespace ServiceReference2
             return base.Channel.SetOutputValueAsync(tagId, value);
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.Tag[]> GetAllTagsAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetAllTagsAsync()
         {
             return base.Channel.GetAllTagsAsync();
         }
         
-        public System.Threading.Tasks.Task<ServiceReference2.AnalogInputTag[]> GetAnalogInputTagsAsync()
+        public System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetAnalogInputTagsAsync()
         {
             return base.Channel.GetAnalogInputTagsAsync();
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetOutputTagsAsync()
+        {
+            return base.Channel.GetOutputTagsAsync();
         }
         
         public System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold)
@@ -445,6 +295,11 @@ namespace ServiceReference2
         public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName)
         {
             return base.Channel.RemoveAlarmAsync(tagName);
+        }
+        
+        public System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetInputTagsAsync()
+        {
+            return base.Channel.GetInputTagsAsync();
         }
         
         public System.Threading.Tasks.Task<ServiceReference2.Alarm[]> GetAlarmsAsync()

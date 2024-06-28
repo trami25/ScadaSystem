@@ -66,6 +66,10 @@
       <Project>{3127ef2c-d932-4317-88c0-f775f8471c1d}</Project>
       <Name>DriverApi</Name>
     </ProjectReference>
+    <ProjectReference Include="..\RTDriver\RTDriver.csproj">
+      <Project>{b3aa1e7c-c3e3-4f68-9f3c-87a67c54f729}</Project>
+      <Name>RTDriver</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ScadaCore\ScadaCore.csproj">
       <Project>{1b8dac8c-922b-489c-891a-1646c765f794}</Project>
       <Name>ScadaCore</Name>

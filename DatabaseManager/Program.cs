@@ -293,7 +293,21 @@ namespace DatabaseManager
                             {
                                 Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
                             }
-                           
+                            var tagId = "";
+                            while (true)
+                            {
+                                Console.Write("Enter tag if to add alarm: ");
+                                tagId = Console.ReadLine();
+                                var tag = analogInputs.FirstOrDefault(tag => tag.Id == tagId);
+                                if (tag == null)
+                                {
+                                    Console.WriteLine("Please enter the correct id!.");
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
                             Console.Write("Enter tag name to add alarm: ");
                             var tagName = Console.ReadLine();
                             Console.Write("Enter alarm type (High/Low): ");
@@ -303,7 +317,7 @@ namespace DatabaseManager
                             Console.Write("Enter threshold: ");
                             var threshold = double.Parse(Console.ReadLine());
 
-                            resultMessage = await tagProxy.AddAlarmAsync(tagName, type, priority, threshold);
+                            resultMessage = await tagProxy.AddAlarmAsync(tagId, tagName, type, priority, threshold);
                             Console.WriteLine(resultMessage);
                         }
                         else if (choice == "9")
@@ -314,11 +328,25 @@ namespace DatabaseManager
                             {
                                 Console.WriteLine($"ID: {input.Id}, Value: {input.Value}");
                             }
-
+                            var tagId = "";
+                            while (true)
+                            {
+                                Console.Write("Enter tag if to add alarm: ");
+                                tagId = Console.ReadLine();
+                                var tag = analogInputs.FirstOrDefault(tag => tag.Id == tagId);
+                                if (tag == null)
+                                {
+                                    Console.WriteLine("Please enter the correct id!.");
+                                }
+                                else
+                                {
+                                    break;
+                                }
+                            }
                             Console.Write("Enter tag name to remove alarm: ");
                             var tagName = Console.ReadLine();
 
-                            resultMessage = await tagProxy.RemoveAlarmAsync(tagName);
+                            resultMessage = await tagProxy.RemoveAlarmAsync(tagId, tagName);
                             Console.WriteLine(resultMessage);
                         }
                         else if (choice == "10")

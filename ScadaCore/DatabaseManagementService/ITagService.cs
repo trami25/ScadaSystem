@@ -47,10 +47,10 @@ namespace ScadaCore.DatabaseManagementService
         ICollection<TagData> GetOutputTags();
 
         [OperationContract]
-        string AddAlarm(string tagName, string type, int priority, double threshold);
+        string AddAlarm(string tagId, string tagName, string type, int priority, double threshold);
 
         [OperationContract]
-        string RemoveAlarm(string tagName);
+        string RemoveAlarm(string tagId, string tagName);
 
         [OperationContract]
         ICollection<TagData> GetInputTags();

@@ -170,10 +170,10 @@ namespace ServiceReference2
         System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetOutputTagsAsync();
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/AddAlarm", ReplyAction="http://tempuri.org/ITagService/AddAlarmResponse")]
-        System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold);
+        System.Threading.Tasks.Task<string> AddAlarmAsync(string tagId, string tagName, string type, int priority, double threshold);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/RemoveAlarm", ReplyAction="http://tempuri.org/ITagService/RemoveAlarmResponse")]
-        System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName);
+        System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagId, string tagName);
         
         [System.ServiceModel.OperationContractAttribute(Action="http://tempuri.org/ITagService/GetInputTags", ReplyAction="http://tempuri.org/ITagService/GetInputTagsResponse")]
         System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetInputTagsAsync();
@@ -287,14 +287,14 @@ namespace ServiceReference2
             return base.Channel.GetOutputTagsAsync();
         }
         
-        public System.Threading.Tasks.Task<string> AddAlarmAsync(string tagName, string type, int priority, double threshold)
+        public System.Threading.Tasks.Task<string> AddAlarmAsync(string tagId, string tagName, string type, int priority, double threshold)
         {
-            return base.Channel.AddAlarmAsync(tagName, type, priority, threshold);
+            return base.Channel.AddAlarmAsync(tagId, tagName, type, priority, threshold);
         }
         
-        public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagName)
+        public System.Threading.Tasks.Task<string> RemoveAlarmAsync(string tagId, string tagName)
         {
-            return base.Channel.RemoveAlarmAsync(tagName);
+            return base.Channel.RemoveAlarmAsync(tagId, tagName);
         }
         
         public System.Threading.Tasks.Task<ServiceReference2.TagData[]> GetInputTagsAsync()

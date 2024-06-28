@@ -10,9 +10,11 @@ namespace ScadaCore.Tags
     public class TagRepository
     {
         private readonly List<Tag> _tags;
+        private ScadaConfiguration _configuration; 
 
         public TagRepository(ScadaConfiguration config)
         {
+            _configuration = config;
             _tags = config.GetTags().ToList();
         }
 
@@ -41,11 +43,13 @@ namespace ScadaCore.Tags
             }
 
             _tags.Add(tag);
+            _configuration.AddTag(tag);
         }
 
         public void Delete(string id)
         {
             _tags.RemoveAll(t => t.Id == id);
+            _configuration.DeleteTag(id);
         }
 
         public void Update(string id, Tag tag)
@@ -54,7 +58,9 @@ namespace ScadaCore.Tags
             if (oldTag != null)
             {
                 oldTag = tag;
+                _configuration.UpdateTag(tag);
             }
+
         }
 
         public void AddAlarmToAnalogInputTag(string tagId, Alarm alarm)
@@ -66,6 +72,7 @@ namespace ScadaCore.Tags
             }
 
             tag.Alarms.Add(alarm);
+            _configuration.AddAlarmToTag(tagId, alarm);
         }
 
         public void RemoveAlarmFromAnalogInputTag(string tagId, string alarmName)
@@ -83,6 +90,7 @@ namespace ScadaCore.Tags
             }
 
             tag.Alarms.Remove(alarm);
+            _configuration.DeleteAlarmFromTag(tagId, alarmName);
         }
     }
 }

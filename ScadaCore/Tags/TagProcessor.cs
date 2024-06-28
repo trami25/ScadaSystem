@@ -6,6 +6,8 @@ using System.IO;
 using System.Linq;
 using System.ServiceModel;
 using System.Threading.Tasks;
+using System.Windows.Forms;
+using System.Threading;
 
 namespace ScadaCore.Tags
 {
@@ -15,11 +17,13 @@ namespace ScadaCore.Tags
         private readonly TagContext _context;
         private static   DatabaseManagementService.TagService _tagService;
         private readonly List<Alarm> invokedAlarms = new List<Alarm>();
-        private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
+        private static string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
 
         public void AddTagTask(InputTag tag)
         {
-            Task task = new Task(async () => await ReadAndMonitorTag(tag));
+            Task task = new Task(async () => {
+                await ReadAndMonitorTag(tag);
+                });
             _tagIdToTask[tag.Id] = task;
             task.Start();
         }
@@ -28,8 +32,12 @@ namespace ScadaCore.Tags
         {
             if (_tagIdToTask.TryGetValue(id, out Task task))
             {
-                task.Dispose();
-                _tagIdToTask.Remove(id);
+                if (task.IsCompleted)
+                {
+                    task.Dispose();
+                    _tagIdToTask.Remove(id);
+                }
+
             }
         }
 
@@ -37,8 +45,9 @@ namespace ScadaCore.Tags
         {
             while (true)
             {
-                tag.ReadValue();
                 await MonitorTag(tag);
+                tag.ReadValue();
+                
                 await Task.Delay(tag.ScanTime);
             }
         }

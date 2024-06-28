@@ -40,6 +40,17 @@ namespace ScadaCore.Tags.Model
             {
                 Value = Driver.ReturnValue(IOAddress);
 
+                if (this is DigitalInputTag)
+                {
+                    if (Value > 50)
+                    {
+                        Value = 1;
+                    } else
+                    {
+                        Value = 0;
+                    }
+                }
+
                 tagValue.Value = Value;
                 tagValue.TagId = Id;
                 tagValue.Timestamp = DateTime.Now;

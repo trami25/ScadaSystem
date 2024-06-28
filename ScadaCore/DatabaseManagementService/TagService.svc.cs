@@ -23,11 +23,14 @@ namespace ScadaCore.DatabaseManagementService
         private static List<Alarm> invokedAlarms = new List<Alarm>();
         private static readonly string AlarmsLogFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "alarmsLog1.txt");
         private static readonly TagValueContext tagValueContext = new TagValueContext();
+        private ScadaCore.Tags.TagService tagService1;
      
         private NamedPipeServerStream pipeServer;
 
         public TagService()
         {
+            tagService1 = new Tags.TagService(new TagRepository(new Configuration.ScadaConfiguration(@"../../scadaConfig.xml", new MainSimulationDriver(), new RTDriver.RTDriver())), new TagProcessor());
+            tags = tagService1.GetAll().ToList();
 /*
             Task.Run(() => MonitorTags());
             Console.WriteLine("TagService initialized and monitoring started.");
@@ -45,13 +48,14 @@ namespace ScadaCore.DatabaseManagementService
             AnalogInputTag aiTag;
             if (driver == "r")
             {
-                aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver(), new List<Alarm>());
+                aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new RTDriver.RTDriver(), new List<Alarm>());
             }
             else
             {
                  aiTag = new AnalogInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit), new MainSimulationDriver(), new List<Alarm>());
             }
                 tags.Add(aiTag);
+                tagService1.Create(aiTag);
             string message = $"Analog Input Tag added: {tagId}";
             return message;
         }
@@ -60,6 +64,7 @@ namespace ScadaCore.DatabaseManagementService
         {
             AnalogOutputTag aoTag = new AnalogOutputTag(tagId, description, ioAddress, value, initialValue, lowLimit, highLimit, (Unit)Enum.Parse(typeof(Unit), unit));
             tags.Add(aoTag);
+            tagService1.Create(aoTag);
             return $"Analog Output Tag added: {tagId}";
         }
 
@@ -68,13 +73,14 @@ namespace ScadaCore.DatabaseManagementService
             DigitalInputTag diTag;
             if (driver == "r")
             {
-                diTag = new DigitalInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, new MainSimulationDriver());
+                diTag = new DigitalInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, new RTDriver.RTDriver());
             }
             else
             {
                 diTag = new DigitalInputTag(tagId, description, ioAddress, value, scanTime, isScanOn, new MainSimulationDriver());
             }
             tags.Add(diTag);
+            tagService1.Create(diTag);
             return $"Digital Input Tag added: {tagId}";
         }
 
@@ -82,6 +88,7 @@ namespace ScadaCore.DatabaseManagementService
         {
             DigitalOutputTag doTag = new DigitalOutputTag(tagId, description, ioAddress, value, initialValue);
             tags.Add(doTag);
+            tagService1.Create(doTag);
             return $"Digital Output Tag added: {tagId}";
         }
 
@@ -91,6 +98,7 @@ namespace ScadaCore.DatabaseManagementService
             if (inputTag != null)
             {
                 inputTag.IsScanOn = false;
+                tagService1.Update(tagId, inputTag);
                 return $"Scanning disabled for tag: {tagId}";
             }
             else
@@ -105,6 +113,7 @@ namespace ScadaCore.DatabaseManagementService
             if (inputTag != null)
             {
                 inputTag.IsScanOn = true;
+                tagService1.Update(tagId , inputTag);
                 return $"Scanning enabled for tag: {tagId}";
             }
             else
@@ -149,6 +158,7 @@ namespace ScadaCore.DatabaseManagementService
             if (tagToRemove != null)
             {
                 tags.Remove(tagToRemove);
+                tagService1.Delete(tagId);
                 return $"Tag removed: {tagId}";
             }
             else
@@ -173,6 +183,7 @@ namespace ScadaCore.DatabaseManagementService
                     tagValueContext.TagValues.Add(tagValue);
                     tagValueContext.SaveChanges();
                 }
+                tagService1.Update(tagId, outputTag);
                 return $"Output value set for tag {tagId}: {value}";
                 
             }
@@ -182,9 +193,9 @@ namespace ScadaCore.DatabaseManagementService
             }
         }
 
-        public string AddAlarm(string tagName, string type, int priority, double threshold)
+        public string AddAlarm(string tagId, string tagName, string type, int priority, double threshold)
         {
-            var analogInputTag = tags.OfType<AnalogInputTag>().FirstOrDefault(t => t.Id == tagName);
+            var analogInputTag = tags.OfType<AnalogInputTag>().FirstOrDefault(t => t.Id == tagId);
             if (analogInputTag == null)
             {
                 Console.WriteLine($"Failed to add alarm. Tag not found: {tagName}");
@@ -193,15 +204,17 @@ namespace ScadaCore.DatabaseManagementService
 
             var alarm = new Alarm(tagName, type, priority, threshold);
             alarms.Add(alarm);
+            tagService1.AddAlarmToAnalogInputTag(tagId, alarm);
             return $"Alarm added for tag {tagName}: Type={type}, Priority={priority}, Threshold={threshold}";
         }
 
-        public string RemoveAlarm(string tagName)
+        public string RemoveAlarm(string tagId, string tagName)
         {
-            var alarmToRemove = alarms.FirstOrDefault(a => a.TagName == tagName);
+            var alarmToRemove = alarms.FirstOrDefault(a => a.TagName == tagId);
             if (alarmToRemove != null)
             {
                 alarms.Remove(alarmToRemove);
+                tagService1.RemoveAlarmFromAnalogInputTag(tagId, tagName);
            
                 return $"Alarm removed for tag: {tagName}";
             }
